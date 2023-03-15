@@ -1,0 +1,13 @@
+Dyrektor:
+
+Nauczyciele: 
+    jkowalski@example.com
+    haslo123
+
+    anowak@example.com
+    qwerty456
+
+    pwisniewski@example.com
+    abc789
+
+Uczniowie:

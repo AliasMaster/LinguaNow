@@ -1,0 +1,10 @@
+marks
+admissions
+groups
+
+
+users/studends
+users/teachers
+    |
+    v
+sprawdzić te wszystkie subID itp

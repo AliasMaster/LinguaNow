@@ -1,0 +1,14 @@
+@INFO[token -> :token:userId]
+
+@REQUIRED token
+GET /api/users -> używane do wybrania adresata w wiadomościach trzeba filtorwać aby nie było użytkownika
+DELETE /api/users/:id -> usuwanie użytkownika tylko dla tokena 1
+
+@REQUIRED token
+GET /api/messages -> bierze wiadomości dla danego użytkownika
+POST /api/messages -> dodaje wiadomość
+
+@REQUIRED token
+GET /api/nav -> bierze itemy nava
+
+POST /api/login -> dodawanie użytkownika

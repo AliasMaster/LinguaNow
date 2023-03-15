@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel</title>
+    
+    <script>
+        if(localStorage.getItem('token')) {
+            const hostname = window.location.hostname;
+            window.location.href = `http://${hostname}/Tests/Panel`;
+        }
+        
+        async function login() {
+
+            const postData = {
+                email: document.querySelector('#email').value,
+                password: document.querySelector('#password').value,
+            }
+            
+            const response = await fetch('api/login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData)
+            });
+
+            if(response.ok) {
+                const data = await response.json();
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userData', JSON.stringify(data.userData));
+
+                const hostname = window.location.hostname;
+                window.location.href = `http://${hostname}/Tests/Panel`;
+            } else {
+                const data = await response.json();
+        
+                const warningBox = document.querySelector('.warning');
+                
+                warningBox.textContent = data.message;
+            }
+
+        }
+        
+        </script>
+</head>
+<body>
+    <form onsubmit="return false;" method="post">
+        <input type="email" name="email" placeholder="Username" id="email" required>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <input type="submit" value="Log In" onclick="login()">
+    </form>
+
+    <div class="warning">
+
+    </div>
+</body>
+</html>
