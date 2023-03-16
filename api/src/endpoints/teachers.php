@@ -8,12 +8,17 @@ class Teachers
     {
 
         $tokenClass = new Token();
-        $token = $tokenClass->get_bearer_token()->token;
+        $token = $tokenClass->get_bearer_token();
 
         $this->conn = $database->getConnection();
 
-        if ($method == "GET" && $token == 1) {
-            $this->getAll();
+        if ($method == "GET" ) {
+            if(isset($token->token) && $token->token == 1) {
+                $this->getByToken($token);
+            } else {
+                $this->getAll();
+            }
+
             exit;
         }else {
             http_response_code(401);
@@ -26,7 +31,33 @@ class Teachers
 
     public function getAll()
     {
-        $sql = "SELECT CONCAT(fname, ' ', lname) as name, id, email, city, address, phone FROM users WHERE accessLevel = 2";
+        // $sql = "SELECT CONCAT(fname, ' ', lname) as name, id, email, city, address, phone FROM users WHERE accessLevel = 2";
+
+        $sql = "SELECT CONCAT(fname, ' ', fname) as name, description, img FROM teachers INNER JOIN users ON users.id = teachers.userId";
+
+        $result = $this->conn->query($sql);
+
+        $user = [];
+
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            array_push($user, [
+                // "id" => $row['id'],
+                "name" => $row['name'],
+                "description" => $row['description'],
+                "img" => $row['img']
+                // "email" => $row['email'],
+                // "city" => $row['city'],
+                // "address" => $row['address'],
+                // "phone" => $row['phone']
+            ]);
+        }
+
+        echo json_encode(["teachers" => $user]);
+    }
+
+    public function getByToken()
+    {
+        $sql = "SELECT CONCAT(fname, ' ', lname) as name, users.id, email, city, address, phone, groups.id as groupId FROM users INNER JOIN groups ON groups.teacher = users.id";
 
         $result = $this->conn->query($sql);
 
@@ -39,7 +70,8 @@ class Teachers
                 "email" => $row['email'],
                 "city" => $row['city'],
                 "address" => $row['address'],
-                "phone" => $row['phone']
+                "phone" => $row['phone'],
+                "group" => $row['groupId']
             ]);
         }
 

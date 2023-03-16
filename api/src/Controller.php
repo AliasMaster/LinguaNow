@@ -23,6 +23,12 @@ class Controller
             case "students":
                 new Students($database, $method);
                 break;
+            case "courses":
+                new Courses($database, $method);
+                break;
+            case "signIn":
+                new signIn($database, $method);
+                break;
             default:
                 http_response_code(404);
                 echo json_encode([
