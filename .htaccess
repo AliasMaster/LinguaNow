@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Dodaj ".html" na końcu adresu URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Przekieruj żądania do plików podstron
+RewriteRule ^Kursy/?$ src/pages/kursy.html [NC,L]
+RewriteRule ^Instruktorzy/?$ src/pages/instruktorzy.html [NC,L]
+RewriteRule ^Kontakt/?$ src/pages/Kontakt.html [NC,L]
+RewriteRule ^O-nas/?$ src/pages/O-nas.html [NC,L]
+RewriteRule ^Logowanie/?$ src/pages/Logowanie.html [NC,L]
+RewriteRule ^Panel/?$ src/pages/Panel.html [NC,L]

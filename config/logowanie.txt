@@ -1,0 +1,34 @@
+Dyrektor:
+
+	mateusz@example.com
+	mateusz123
+
+Nauczyciele: 
+    jkowalski@example.com
+    haslo123
+
+    anowak@example.com
+    qwerty456
+
+    pwisniewski@example.com
+    abc789
+
+Uczniowie:
+
+	janek@example.com
+	janek123
+
+	ania@example.com
+	ania123
+
+	tomek@example.com
+	tomek123
+
+	kasia@example.com
+	kasia123
+
+	pawel@example.com
+	pawel123
+
+	marta@example.com
+	marta123
