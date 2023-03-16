@@ -23,42 +23,16 @@ class Nav
 
     public function getNavItems($token)
     {
-        $navListItmes = [
-            "students" => ['name' => 'uczniowie', "functionName" => "students"], 
-            "teachers" => ['name' => 'nauczyciele', "functionName" => "teachers"],
-            "admissions" => ['name' => 'zgłoszenia', "functionName" => "admissions"],
-            "groups" => ['name' => 'grupy', "functionName" => "groups"],
-            "messages" => ['name' => 'wiadomości', "functionName" => "messages"],
-            "marks" => ['name' => 'oceny', "functionName" => "marks"],
-            "logOut" => ['name' => 'wyloguj się', "functionName" => "logOut"]
-        ];
-
-        $navUserItems = [];
-
+        $navListItmes = [];
         switch ($token) {
             case '1':
-                $navUserItems = [
-                    $navListItmes['students'],
-                    $navListItmes['teachers'],
-                    $navListItmes['admissions'],
-                    $navListItmes['groups'],
-                    $navListItmes['messages'],
-                    $navListItmes['logOut'],
-                ];
+                $navListItmes = ['uczniowie', 'nauczyciele', 'zgłoszenia', 'grupy', 'wiadomości', 'wyloguj się'];
                 break;
             case '2':
-                $navUserItems = [
-                    $navListItmes['groups'],
-                    $navListItmes['messages'],
-                    $navListItmes['logOut']
-                ];
+                $navListItmes = ['grupy', 'wiadomości', 'wyloguj się'];
                 break;
             case '3':
-                $navUserItems = [
-                    $navListItmes['marks'],
-                    $navListItmes['messages'],
-                    $navListItmes['logOut']
-                ];
+                $navListItmes = ['oceny', 'wiadomości', 'wyloguj się'];
                 break;
             default:
                 http_response_code(401);
@@ -70,7 +44,7 @@ class Nav
         }
 
         echo json_encode([
-            "items" => $navUserItems
+            "items" => $navListItmes
         ]);
     }
 }

@@ -6,7 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <script type="module" src="./panelApp.js" defer></script>
+    <script type="module">
+        import startOfURL from './config/CONST.js';
+        if(!localStorage.getItem('token')) {
+            window.location.href = `${startOfURL}/`;
+        }
+
+        const token = localStorage.getItem('token');
+
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        
+        async function getNav(token) {
+            const respone = await fetch(`${startOfURL}/api/nav`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            });
+            
+            if(respone.ok) {
+                const data = await respone.json();
+
+                parseItemsToNav(data.items);
+            } else {
+                const data = await respone.json();
+                
+            }
+        }
+
+        function parseItemsToNav(items) {
+            const navBox = document.querySelector('.navListItems');
+
+            items.forEach(item => {
+                navBox.innerHTML += `<li class="navItem">${item}</li>`;
+            });
+        }
+        
+        getNav(token);
+
+        async function getUsers(token) {
+            const response = await fetch('../api/users', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            
+            const data = await response.json();
+
+            
+            const users = data.users;
+            console.log(users)
+
+            let userBox = document.querySelector('.users');
+
+            users.forEach(user => {
+                userBox.innerHTML+= user.email + "<br>"
+                userBox.innerHTML+= user.password + "<br><br>"
+                userBox.innerHTML+= user.hashPassword + "<br><br>"
+            });
+        }
+
+        // getUsers(token);
+
+    </script>
 </head>
 <body>
     <main>
@@ -16,7 +78,7 @@
             </nav>
         </aside>
 
-        <div id="root"></div>
+        <div class="users"></div>
     </main>
 </body>
 </html>

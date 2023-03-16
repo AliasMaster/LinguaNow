@@ -6,7 +6,6 @@ export default class getTeachers {
   async getAll(startOfURL) {
     const response = await fetch(`${startOfURL}/api/teachers`);
 
-    
     if (response.ok) {
       const data = await response.json();
 

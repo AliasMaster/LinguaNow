@@ -26,7 +26,7 @@ class Students
 
     public function getAll()
     {
-        $sql = "SELECT CONCAT(fname, ' ', lname) as name, users.id, email, city, address, phone, students.groupId FROM users INNER JOIN students ON students.userId = users.id";
+        $sql = "SELECT CONCAT(fname, ' ', lname) as name, id, email, city, address, phone FROM users WHERE accessLevel = 3";
 
         $result = $this->conn->query($sql);
 
@@ -39,8 +39,7 @@ class Students
                 "email" => $row['email'],
                 "city" => $row['city'],
                 "address" => $row['address'],
-                "phone" => $row['phone'],
-                "group" => $row['groupId']
+                "phone" => $row['phone']
             ]);
         }
 
