@@ -67,11 +67,11 @@ class Login
                     ]);
                 } else {
                     http_response_code(422);
-                    echo json_encode(['message' => 'Invalid Password!']);
+                    echo json_encode(['message' => 'Nie poprawny E-mail lub hasło']);
                 }
             } else {
                 http_response_code(422);
-                echo json_encode(['message' => 'Invalid Email Address!']);
+                echo json_encode(['message' => 'Nie poprawny E-mail lub hasło']);
             }
         }
     }

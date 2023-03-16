@@ -11,6 +11,7 @@ require_once('./src/endpoints/users.php');
 require_once('./src/endpoints/messages.php');
 require_once('./src/endpoints/courses.php');
 require_once('./src/endpoints/teachers.php');
+require_once('./src/endpoints/students.php');
 require_once('./src/endpoints/signIn.php');
 
 require_once('./src/Controller.php');
