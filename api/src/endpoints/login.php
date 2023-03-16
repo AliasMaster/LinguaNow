@@ -5,7 +5,7 @@ class Login
     private PDO $conn;
     private $data;
 
-    public function __construct(private Database $database, private  string $method)
+    public function __construct(Database $database, string $method)
     {
         $this->conn = $database->getConnection();
 
@@ -32,7 +32,7 @@ class Login
             || empty(trim($this->data->password))
         ) {
             http_response_code(404);
-            echo json_encode(['message' => 'Nie wypełniono wszystkich pól']);
+            echo json_encode(['message' => 'Incorrect inputs!']);
         } else {
             $email = $this->data->email;
             $password = $this->data->password;
@@ -67,11 +67,11 @@ class Login
                     ]);
                 } else {
                     http_response_code(422);
-                    echo json_encode(['message' => 'Nie poprawyny email lub hasło']);
+                    echo json_encode(['message' => 'Invalid Password!']);
                 }
             } else {
                 http_response_code(422);
-                echo json_encode(['message' => 'Nie poprawyny email lub hasło']);
+                echo json_encode(['message' => 'Invalid Email Address!']);
             }
         }
     }

@@ -4,39 +4,45 @@ class Teachers
 {
     private PDO $conn;
 
-    public function __construct($database, $method)
+    public function __construct(Database $database, $method)
     {
+
+        $tokenClass = new Token();
+        $token = $tokenClass->get_bearer_token()->token;
+
         $this->conn = $database->getConnection();
 
-        switch ($method) {
-            case 'GET':
-                $this->get();
-                break;
-
-            default:
-                http_response_code(405);
-                header("Allow: GET");
-                break;
+        if ($method == "GET" && $token == 1) {
+            $this->getAll();
+            exit;
+        }else {
+            http_response_code(401);
+            echo json_encode([
+                'message' => 'Access denied'
+            ]);
+            exit;
         }
     }
 
-    public function get()
+    public function getAll()
     {
-        $sql = "SELECT CONCAT(fname, ' ', lname) as name, description, img FROM teachers INNER JOIN users ON users.id = teachers.userId;";
+        $sql = "SELECT CONCAT(fname, ' ', lname) as name, id, email, city, address, phone FROM users WHERE accessLevel = 2";
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
+        $result = $this->conn->query($sql);
 
-        $teachers = [];
+        $user = [];
 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            array_push($teachers, [
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            array_push($user, [
+                "id" => $row['id'],
                 "name" => $row['name'],
-                "description" => $row['description'],
-                "img" => $row['img']
+                "email" => $row['email'],
+                "city" => $row['city'],
+                "address" => $row['address'],
+                "phone" => $row['phone']
             ]);
         }
 
-        echo json_encode(["teachers" => $teachers]);
+        echo json_encode($user);
     }
 }

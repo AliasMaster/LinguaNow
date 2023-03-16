@@ -26,13 +26,13 @@ class Nav
         $navListItmes = [];
         switch ($token) {
             case '1':
-                $navListItmes = ['uczniowie', 'nauczyciele', 'zgłoszenia', 'grupy', 'wiadomości'];
+                $navListItmes = ['uczniowie', 'nauczyciele', 'zgłoszenia', 'grupy', 'wiadomości', 'wyloguj się'];
                 break;
             case '2':
-                $navListItmes = ['grupa', 'oceny', 'wiadomości'];
+                $navListItmes = ['grupy', 'wiadomości', 'wyloguj się'];
                 break;
             case '3':
-                $navListItmes = ['oceny', 'wiadomości'];
+                $navListItmes = ['oceny', 'wiadomości', 'wyloguj się'];
                 break;
             default:
                 http_response_code(401);

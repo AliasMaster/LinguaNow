@@ -8,17 +8,17 @@ class Users
     {
 
         $tokenClass = new Token();
-        $token = $tokenClass->get_bearer_token()->token;
+        $token = $tokenClass->get_bearer_token();
 
         $this->conn = $database->getConnection();
 
         if (!$id) {
             if ($method == "GET") {
-                $this->getAll($token);
+                $this->getAll($token->userId);
                 exit;
             }
         } else {
-            if ($method == "DELETE" && $token == 1) {
+            if ($method == "DELETE" && $token->token == 1) {
                 $this->deleteUser($id);
             } else {
                 http_response_code(401);
@@ -30,11 +30,12 @@ class Users
         }
     }
 
-    public function getAll()
+    public function getAll($userId)
     {
-        $sql = "SELECT CONCAT(fname, ' ', lname) as name, id, accessLevel FROM users";
-
-        $result = $this->conn->query($sql);
+        $sql = "SELECT CONCAT(fname, ' ', lname) as name, password, email, id, accessLevel FROM users WHERE id <> :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":id", $userId, PDO::PARAM_INT);
+        $stmt->execute();
 
         function getRole($accessLevel)
         {
@@ -60,15 +61,18 @@ class Users
 
         $user = [];
 
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             array_push($user, [
                 "id" => $row['id'],
                 "name" => $row['name'],
-                "role" => getRole($row['accessLevel'])
+                "role" => getRole($row['accessLevel']),
+                "email" => $row['email'],
+                "password" => $row['password'],
+                "hashPassword" => password_hash($row['password'], PASSWORD_ARGON2I)
             ]);
         }
 
-        echo json_encode($user);
+        echo json_encode([ "users" => $user ]);
     }
 
     public function deleteUser($id)
