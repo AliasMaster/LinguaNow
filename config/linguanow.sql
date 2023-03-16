@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Mar 2023, 21:34
+-- Czas generowania: 16 Mar 2023, 18:50
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -173,6 +173,18 @@ CREATE TABLE `students` (
   `groupId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+--
+-- Zrzut danych tabeli `students`
+--
+
+INSERT INTO `students` (`id`, `userId`, `groupId`) VALUES
+(1, 4, 1),
+(2, 5, 1),
+(3, 6, 2),
+(4, 7, 2),
+(5, 8, 3),
+(6, 9, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -218,16 +230,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `fname`, `lname`, `phone`, `address`, `city`, `accessLevel`) VALUES
-(1, 'jkowalski@example.com', '$2y$10$aOK0GhrEjZuIhcLDj/gFpOHlNS8Odl4jaHkD5lciLzv5MZRKqCsiK', 'Jan', 'Kowalski', '111-222-333', 'ul. Główna 1', 'Warszawa', 2),
-(2, 'anowak@example.com', '$2y$10$ZtCSGkMY/aiivuZIYiB2VOx4j1HE9hZ5CYMZ33zePIv8M/xom6GgC', 'Anna', 'Nowak', '222-111-333', 'ul. Słoneczna 5', 'Kraków', 2),
-(3, 'pwisniewski@example.com', '$2y$10$l6D8HZtXh1RM8LiEaMW3VugAyLPhERQUA4bmPxxkQRCbybd0R.zDm', 'Piotr', 'Wiśniewski', '333-222-111', 'ul. Zielona 10', 'Gdańsk', 2),
-(4, 'janek@example.com', 'janek123', 'Jan', 'Kowalski', '234-242-131', 'ul. Nowa 10', 'Warszawa', 3),
-(5, 'ania@example.com', 'ania123', 'Anna', 'Nowak', '878-424-243', 'ul. Kwiatowa 3', 'Kraków', 3),
-(6, 'tomek@example.com', 'tomek123', 'Tomasz', 'Wójcik', '872-422-423', 'ul. Zielona 7', 'Poznań', 3),
-(7, 'kasia@example.com', 'kasia123', 'Katarzyna', 'Kowalczyk', '472-894-734', 'ul. Lipowa 2', 'Gdańsk', 3),
-(8, 'pawel@example.com', 'pawel123', 'Paweł', 'Kaczmarek', '876-432-132', 'ul. Czerwona 5', 'Łódź', 3),
-(9, 'marta@example.com', 'marta123', 'Marta', 'Zając', '231-997-122', 'ul. Słoneczna 9', 'Wrocław', 3),
-(10, 'mateusz@example.com', 'mateusz123', 'Mateusz', 'Włodarczyk', '123-123-123', 'Jagiellońska 13', 'Sosnowiec', 1);
+(1, 'jkowalski@example.com', '$2y$10$9a3cskedJroiqzB5Z5ZDtOnk3liVxfP/BGyC02VfPMeJapMx3DB22', 'Jan', 'Kowalski', '111-222-333', 'ul. Główna 1', 'Warszawa', 2),
+(2, 'anowak@example.com', '$2y$10$p8LElA/kgwoVCoPmyCR6KOZa0xJHNGwzEZbI6jQzM9JhZuyErk3fK', 'Anna', 'Nowak', '222-111-333', 'ul. Słoneczna 5', 'Kraków', 2),
+(3, 'pwisniewski@example.com', '$2y$10$jACnnuK.JtaD7Cs806QAUOxHqAB6HqDrD9pl9kEl.x1AZYT.eGGuC', 'Piotr', 'Wiśniewski', '333-222-111', 'ul. Zielona 10', 'Gdańsk', 2),
+(4, 'janek@example.com', '$2y$10$HvZBdyVKH1WrU6czpScO8unpYf97oiyFur/pBwHapwMopIBXGBNOS', 'Jan', 'Kowalski', '234-242-131', 'ul. Nowa 10', 'Warszawa', 3),
+(5, 'ania@example.com', '$2y$10$YRmOq0TluyGT99ykk6rvg.0xbyiVnRLv8XQ4J1aQkYKJotVnw2tZu', 'Anna', 'Nowak', '878-424-243', 'ul. Kwiatowa 3', 'Kraków', 3),
+(6, 'tomek@example.com', '$2y$10$QGkpwNa5xOTMM2Xyfp/VXOa4m0/waaGM902tYniBKtIlSCBfIJ7FW', 'Tomasz', 'Wójcik', '872-422-423', 'ul. Zielona 7', 'Poznań', 3),
+(7, 'kasia@example.com', '$2y$10$a.xRZuKVqo9aybVQzPhTWOQPL2DE.KWF5qfUhvnwdCFxt3U4o0BVW', 'Katarzyna', 'Kowalczyk', '472-894-734', 'ul. Lipowa 2', 'Gdańsk', 3),
+(8, 'pawel@example.com', '$2y$10$n.PARMfkesvSDnyj7Hd3GePWX4L/31JyONYNd0LwgVJhe3dXYcskm', 'Paweł', 'Kaczmarek', '876-432-132', 'ul. Czerwona 5', 'Łódź', 3),
+(9, 'marta@example.com', '$2y$10$KFl92FeSt8W4LgDlE7bwVeQgLWYluVWOILlwhJyAkdz7xxM/ubiDi', 'Marta', 'Zając', '231-997-122', 'ul. Słoneczna 9', 'Wrocław', 3),
+(10, 'mateusz@example.com', '$2y$10$l5p86juqD8l9AHcUvF0O6uGQEnB12Muap8rLH3fnJObqiwpKuoEkC', 'Mateusz', 'Włodarczyk', '123-123-123', 'Jagiellońska 13', 'Sosnowiec', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -301,7 +313,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT dla tabeli `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
