@@ -13,6 +13,8 @@ require_once('./src/endpoints/courses.php');
 require_once('./src/endpoints/teachers.php');
 require_once('./src/endpoints/students.php');
 require_once('./src/endpoints/signIn.php');
+require_once('./src/endpoints/admisions.php');
+require_once('./src/endpoints/groups.php');
 
 require_once('./src/Controller.php');
 require_once('./src/Token.php');

@@ -24,13 +24,13 @@ class Nav
     public function getNavItems($token)
     {
         $navListItmes = [
-            "students" => ['name' => 'uczniowie', "functionName" => "students"], 
-            "teachers" => ['name' => 'nauczyciele', "functionName" => "teachers"],
-            "admissions" => ['name' => 'zgłoszenia', "functionName" => "admissions"],
-            "groups" => ['name' => 'grupy', "functionName" => "groups"],
-            "messages" => ['name' => 'wiadomości', "functionName" => "messages"],
-            "marks" => ['name' => 'oceny', "functionName" => "marks"],
-            "logOut" => ['name' => 'wyloguj się', "functionName" => "logOut"]
+            "students" => ['name' => 'uczniowie', "functionName" => "students", "icon" => "group"],
+            "teachers" => ['name' => 'nauczyciele', "functionName" => "teachers", "icon" => "group_work"],
+            "admissions" => ['name' => 'zgłoszenia', "functionName" => "admissions", "icon" => "other_admission"],
+            "groups" => ['name' => 'grupy', "functionName" => "groups", "icon" => "groups"],
+            "messages" => ['name' => 'wiadomości', "functionName" => "messages", "icon" => "chat"],
+            "marks" => ['name' => 'oceny', "functionName" => "marks", "icon" => "grade"],
+            "logOut" => ['name' => 'wyloguj się', "functionName" => "logOut", "icon" => "logout"]
         ];
 
         $navUserItems = [];

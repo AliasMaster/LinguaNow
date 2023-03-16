@@ -1,5 +1,5 @@
 export default function renderContent(content) {
-    const root = document.querySelector("#root");
+  const root = document.querySelector('#root');
 
-    root.innerHTML = content;
+  root.innerHTML = content;
 }

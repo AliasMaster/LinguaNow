@@ -29,6 +29,12 @@ class Controller
             case "signIn":
                 new signIn($database, $method);
                 break;
+            case "admissions":
+                new Admissions($database, $method, $id);
+                break;
+            case "groups":
+                new Groups($database, $method, $id);
+                break;
             default:
                 http_response_code(404);
                 echo json_encode([

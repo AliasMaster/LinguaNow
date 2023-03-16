@@ -1,6 +1,8 @@
-import navmessages from "./messages.js";
-import logOut from "./logOut.js";
-import students from "./students.js";
-import teachers from "./teachers.js";
+import navmessages from './messages.js';
+import logOut from './logOut.js';
+import students from './students.js';
+import teachers from './teachers.js';
+import admissions from './admissions.js';
+import groups from './groups.js';
 
-export default { navmessages, logOut, students, teachers }
+export default { navmessages, logOut, students, teachers, admissions, groups };

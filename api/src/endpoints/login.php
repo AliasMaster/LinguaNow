@@ -51,6 +51,28 @@ class Login
 
                     $token = $row['accessLevel'] . '.' . $row['id'];
 
+                    function getRole($accessLevel)
+                    {
+                        $role = null;
+                        switch ($accessLevel) {
+                            case '1':
+                                $role = 'dyrektor';
+                                break;
+                            case '2':
+                                $role = 'nauczyciel';
+                                break;
+                            case '3':
+                                $role = "uczeń";
+                                break;
+                            default:
+                                http_response_code(500);
+                                echo json_encode(["message" => "unhandle query"]);
+                                break;
+                        }
+
+                        return $role;
+                    }
+
                     echo json_encode([
                         "success" => 1,
                         "message" => "You have successfully logged in.",
@@ -61,7 +83,8 @@ class Login
                             "id" => $row['id'],
                             "phone" => $row['phone'],
                             "address" => $row['address'],
-                            "city" => $row['city']
+                            "city" => $row['city'],
+                            "role" => getRole($row['accessLevel'])
                         ],
                         "token" => $token
                     ]);

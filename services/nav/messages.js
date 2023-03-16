@@ -1,47 +1,46 @@
 export default async function navmessages(startOfURL, token) {
-    const response = await fetch(`${startOfURL}/api/messages`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    });
+  const response = await fetch(`${startOfURL}/api/messages`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    if(response.ok) {
-        const data = await response.json();
-        return render(data);
-    }
+  if (response.ok) {
+    const data = await response.json();
+    return render(data);
+  }
 
-    async function render(data) {
+  async function render(data) {
+    let givenMessages = '';
 
-        let givenMessages = '';
-
-        data.given.forEach(({ subject, from, role, message }) => {
-            givenMessages += `<div class="message">
+    data.given.forEach(({ subject, from, role, message, date }) => {
+      givenMessages += `<div class="message">
                 <div class="messageHeader">
                     <h3>Od: ${from} <span class="role">${role}</span></h3>
-                    <h4>Temat: ${subject}</h4>
+                    <h4>Temat: ${subject} <span class="date">${date}</span></h4>
                 </div>
                 <div class="messegeContent">
                     ${message}
                 </div>
             </div>`;
-        });
+    });
 
-        let sendedMessages = '';
+    let sendedMessages = '';
 
-        data.sended.forEach(({ subject, to, role, message }) => {
-            sendedMessages += `<div class="message">
+    data.sended.forEach(({ subject, to, role, message, date }) => {
+      sendedMessages += `<div class="message">
                 <div class="messageHeader">
                     <h3>Od: ${to} <span class="role">${role}</span></h3>
-                    <h4>Temat: ${subject}</h4>
+                    <h4>Temat: ${subject} <span class="date">${date}</span></h4>
                 </div>
                 <div class="messegeContent">
                     ${message}
                 </div>
             </div>`;
-        });
+    });
 
-        return `<div class="messages">
+    return `<div class="messages">
             <div class="given">
                 <header>
                     <h2>Otrzymane</h2>
@@ -55,5 +54,5 @@ export default async function navmessages(startOfURL, token) {
 
             </div>
         </div>`;
-    }
+  }
 }

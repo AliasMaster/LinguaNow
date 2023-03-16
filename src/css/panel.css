@@ -1,0 +1,135 @@
+:root {
+  --background: #e7e0ec;
+  --surface: #fffbfe;
+  --onSurface: #1c1b1f;
+  --onSurfaceSecondary: #49484b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--background);
+}
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+aside {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--surface);
+  color: var(--onSurface);
+  height: calc(100% - 32px);
+  border-radius: 16px;
+  padding: 20px 48px 20px 16px;
+  opacity: 0.95;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #c4c7c5;
+  margin: 16px 0;
+}
+
+.navItem {
+  height: 56px;
+  padding: 0 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navItem:hover {
+  background-color: #e6e1e5;
+}
+
+.navItem.active {
+  background-color: #e8def8;
+}
+
+.navItem.active:hover {
+  background-color: #d0c7df;
+}
+
+.navItem .icon {
+  display: flex;
+  gap: 12px;
+  text-transform: capitalize;
+}
+
+.userBox {
+  text-transform: capitalize;
+  font-size: 24px;
+}
+
+.userBox span {
+  font-size: 16px;
+  color: var(--onSurfaceSecondary);
+}
+
+#root {
+  height: calc(100vh - 32px);
+  padding: 16px;
+  margin: 8px;
+  border-radius: 16px;
+  width: 100%;
+  background-color: var(--surface);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background-color: #e7e0ec;
+  border-radius: 16px;
+  padding: 8px 16px;
+  height: 65px;
+  color: #49454e;
+}
+
+.group:hover {
+  background-color: #e6e1e5;
+}
+
+.expandMore {
+  position: absolute;
+  right: 16px;
+  top: 32.5px;
+  transform: translateY(-50%);
+}
+
+.group h3,
+.group p {
+  margin: 0;
+}
+
+.group p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.teacherIcon {
+  font-size: 24px;
+}
+
+.group .card {
+}

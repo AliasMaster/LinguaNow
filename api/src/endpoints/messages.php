@@ -88,7 +88,8 @@ class Messages
                 "to" => $row['name'],
                 "role" => getRole($row['accessLevel']),
                 "subject" => $row['subject'],
-                "message" => $row['message']
+                "message" => $row['message'],
+                "date" => $row['date']
             ]);
         }
 
@@ -107,7 +108,8 @@ class Messages
                 "from" => $row['name'],
                 "role" => getRole($row['accessLevel']),
                 "subject" => $row['subject'],
-                "message" => $row['message']
+                "message" => $row['message'],
+                "date" => $row['date']
             ]);
         }
 
