@@ -20,20 +20,23 @@ export default async function groups(startOfURL, token) {
         studentsList += `<li>${student}</li>`;
       });
       groupsList += `
-            <div class="group">
+            <div class="group" onclick="this.classList.toggle('active')">
                 <div class="card">
-                  <h3>Grupa: ${group}</h3>
-                  <p>
-                    <span class="material-symbols-outlined teacherIcon">
-                      person
-                    </span>
-                    ${teacher}
-                  </p>
+                  <div>
+                    <h3>Grupa: ${group}</h3>
+                    <p>
+                      <span class="material-symbols-outlined teacherIcon">
+                        person
+                      </span>
+                      ${teacher}
+                    </p>
+                  </div>
                   <span class="material-symbols-outlined expandMore">
                     expand_more
                   </span>
                 </div>
                 <div class="expand">
+                  <div class="divider"></div>
                   <h5>Uczniowie</h5>
                   <ul class="students">${studentsList}</ul>
                 </div>

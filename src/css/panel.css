@@ -87,6 +87,29 @@ aside {
   overflow-x: hidden;
 }
 
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #e7e0ec #fffbfe;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #fffbfe;
+    border-radius: 16px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #e7e0ec;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
+
 .groups {
   display: flex;
   flex-direction: column;
@@ -102,17 +125,40 @@ aside {
   padding: 8px 16px;
   height: 65px;
   color: #49454e;
+  transition: height 0.6s ease-in-out;
 }
+
+.group .card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .group:hover {
   background-color: #e6e1e5;
 }
 
+.group .expand {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .expandMore {
-  position: absolute;
-  right: 16px;
-  top: 32.5px;
-  transform: translateY(-50%);
+  transition: all 0.2s ease-in-out;
+  transform: rotate(0);
+  transition-delay: 0.2s;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.group:hover .expandMore {
+  background-color: #c4c7c5;
+}
+
+.group.active .expandMore {
+  transform: rotate(-180deg);
+  transition-delay: 0s;
 }
 
 .group h3,
@@ -131,5 +177,6 @@ aside {
   font-size: 24px;
 }
 
-.group .card {
+.group.active {
+  height: 300px;
 }
