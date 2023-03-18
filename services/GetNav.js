@@ -25,7 +25,9 @@ export default class GetNav {
 
     items.forEach(({ name, functionName, icon }) => {
       navBox.innerHTML += `
-                <div class="navItem" aria-functionName="${functionName}">
+                <div class="navItem ${
+                  name == 'home' ? 'active' : ''
+                }" aria-functionName="${functionName}">
                     <div class="icon">
                         <span class="material-symbols-outlined">
                             ${icon}

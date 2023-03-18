@@ -17,6 +17,9 @@ export default async function admissions(startOfURL, token) {
     admissions.forEach(({ id, name, email, phone, course, date }) => {
       admissionsTable += `
             <tr class="admission-${id}">
+                <td>
+                  <input type="checkbox" class="admission-checkBox checkBox" value="admissions-${id}">
+                </td>
                 <td>${name}</td>
                 <td>${email}</td>
                 <td>${phone}</td>
@@ -25,8 +28,22 @@ export default async function admissions(startOfURL, token) {
             </tr>`;
     });
 
+    const selectAllCheckBoxes = `
+      let checkValue = false;
+
+      if (this.checked) {
+        checkValue = true;
+      }
+      const checkBoxes = document.querySelectorAll('.admission-checkBox');
+      checkBoxes.forEach((checkBox) => {
+        checkBox.checked = checkValue;
+      });`;
+
     return `<table>
                 <tr>
+                    <th>
+                      <input type="checkbox" class="checkBox" onclick="${selectAllCheckBoxes}">
+                    </th>
                     <th>Złaszający</th>
                     <th>E-mail</th>
                     <th>Telefon</th>

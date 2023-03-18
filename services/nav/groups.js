@@ -19,9 +19,10 @@ export default async function groups(startOfURL, token) {
       students.forEach((student) => {
         studentsList += `<li>${student}</li>`;
       });
+
       groupsList += `
-            <div class="group" onclick="this.classList.toggle('active')">
-                <div class="card">
+            <div class="group">
+                <div class="card" onclick="this.parentElement.classList.toggle('active')">
                   <div>
                     <h3>Grupa: ${group}</h3>
                     <p>

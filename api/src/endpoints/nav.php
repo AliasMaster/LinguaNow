@@ -24,6 +24,7 @@ class Nav
     public function getNavItems($token)
     {
         $navListItmes = [
+            "home" => ['name' => 'home', "functionName" => "home", "icon" => "home"],
             "students" => ['name' => 'uczniowie', "functionName" => "students", "icon" => "group"],
             "teachers" => ['name' => 'nauczyciele', "functionName" => "teachers", "icon" => "group_work"],
             "admissions" => ['name' => 'zgłoszenia', "functionName" => "admissions", "icon" => "other_admission"],
@@ -38,6 +39,7 @@ class Nav
         switch ($token) {
             case '1':
                 $navUserItems = [
+                    $navListItmes['home'],
                     $navListItmes['students'],
                     $navListItmes['teachers'],
                     $navListItmes['admissions'],
@@ -48,6 +50,7 @@ class Nav
                 break;
             case '2':
                 $navUserItems = [
+                    $navListItmes['home'],
                     $navListItmes['groups'],
                     $navListItmes['messages'],
                     $navListItmes['logOut']
@@ -55,6 +58,7 @@ class Nav
                 break;
             case '3':
                 $navUserItems = [
+                    $navListItmes['home'],
                     $navListItmes['marks'],
                     $navListItmes['messages'],
                     $navListItmes['logOut']
