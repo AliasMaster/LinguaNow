@@ -1,3 +1,9 @@
+import checkBoxes from './checkBoxes.js';
+import edit from './edit.js';
+
+const { selectAllCheckBoxes, onchangeCheckBox } = checkBoxes;
+const role = 'student';
+
 export default async function students(startOfURL, token) {
   const response = await fetch(`${startOfURL}/api/students`, {
     method: 'GET',
@@ -15,14 +21,11 @@ export default async function students(startOfURL, token) {
   async function render(students) {
     let studentsTable = '';
 
-    // <input type="checkbox" class="student-checkBox checkBox" value="student-${id}" checked>
-    //<label></label>
-
     students.forEach(({ id, name, email, city, address, phone, group }) => {
       studentsTable += `
             <tr class="student-${id}">
                 <td>
-                    <div class="checkBoxContainer student-checkBox" onclick="this.classList.toggle('active');">
+                    <div class="checkBoxContainer student-checkBox" id="student-${id}" onclick="this.classList.toggle('active'); (${onchangeCheckBox})('${role}')">
                         <div class="checkBox">
                             <div class="checkBoxContent">
                                 <span class="material-symbols-outlined icon">
@@ -32,36 +35,27 @@ export default async function students(startOfURL, token) {
                         </div>
                     </div>
                 </td>
-                <td>${name}</td>
-                <td>${email}</td>
-                <td>${phone}</td>
-                <td>${address}</td>
-                <td>${city}</td>
-                <td>${group}</td>
+                <td class="data-name">${name}</td>
+                <td class="data-email">${email}</td>
+                <td class="data-phone">${phone}</td>
+                <td class="data-address">${address}</td>
+                <td class="data-city">${city}</td>
+                <td class="data-group">${group}</td>
+                <td class="data-edit">
+                  <div class="editContainer">
+                    <span class="material-symbols-outlined icon" onclick="(${edit.toString()})(this.parentElement.parentElement.parentElement)">
+                      edit
+                    </span>
+                  </div>
+                </td>
             </tr>`;
     });
 
-    function selectAllCheckBoxes(headerCheckBox) {
-      headerCheckBox.classList.toggle('active');
-
-      const checkBoxes = document.querySelectorAll('.student-checkBox');
-
-      if (headerCheckBox.classList.contains('active')) {
-        checkBoxes.forEach((checkBox) => {
-          console.log(checkBox);
-          checkBox.classList.add('active');
-        });
-      } else {
-        checkBoxes.forEach((checkBox) => {
-          checkBox.classList.remove('active');
-        });
-      }
-    }
-
-    return `<table>
+    return `<h2>Uczniowie</h2>
+              <table>
                 <tr>
                     <th>
-                        <div class="checkBoxContainer student-checkBox" onclick="(${selectAllCheckBoxes.toString()})(this)">
+                        <div class="checkBoxContainer studentMain-checkBox" onclick="(${selectAllCheckBoxes.toString()})(this, '${role}')">
                             <div class="checkBox">
                                 <div class="checkBoxContent">
                                     <span class="material-symbols-outlined icon">
@@ -77,6 +71,7 @@ export default async function students(startOfURL, token) {
                     <th>Adres</th>
                     <th>Miasto</th>
                     <th>Grupa</th>
+                    <th class="data-edit">Edycja</th>
                 </tr>
                 ${studentsTable}
             </table>`;

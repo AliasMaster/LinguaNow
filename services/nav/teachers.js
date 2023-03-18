@@ -1,3 +1,9 @@
+import checkBoxes from './checkBoxes.js';
+import edit from './edit.js';
+
+const { selectAllCheckBoxes, onchangeCheckBox } = checkBoxes;
+const role = 'teacher';
+
 export default async function teachers(startOfURL, token) {
   const response = await fetch(`${startOfURL}/api/teachers`, {
     method: 'GET',
@@ -19,32 +25,45 @@ export default async function teachers(startOfURL, token) {
       teachersTable += `
             <tr class="teacher-${id}">
                 <td>
-                    <input type="checkbox" class="teacher-checkBox checkBox" value="teacher-${id}">
+                    <div class="checkBoxContainer teacher-checkBox" id="teacher-${id}" onclick="this.classList.toggle('active'); (${onchangeCheckBox})('${role}')">
+                        <div class="checkBox">
+                            <div class="checkBoxContent">
+                                <span class="material-symbols-outlined icon">
+                                    check
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </td>
-                <td>${name}</td>
-                <td>${email}</td>
-                <td>${phone}</td>
-                <td>${address}</td>
-                <td>${city}</td>
-                <td>${group}</td>
+                <td class="data-name">${name}</td>
+                <td class="data-email">${email}</td>
+                <td class="data-phone">${phone}</td>
+                <td class="data-address">${address}</td>
+                <td class="data-city">${city}</td>
+                <td class="data-group">${group}</td>
+                <td class="data-edit">
+                  <div class="editContainer">
+                    <span class="material-symbols-outlined" onclick="(${edit.toString()})(this.parentElement.parentElement.parentElement)">
+                      edit
+                    </span>
+                  </div>
+                </td>
             </tr>`;
     });
 
-    const selectAllCheckBoxes = `
-      let checkValue = false;
-
-      if (this.checked) {
-        checkValue = true;
-      }
-      const checkBoxes = document.querySelectorAll('.teacher-checkBox');
-      checkBoxes.forEach((checkBox) => {
-        checkBox.checked = checkValue;
-      });`;
-
-    return `<table>
+    return `<h2>Nauczyciele</h2>
+              <table>
                 <tr>
                     <th>
-                        <input type="checkbox" class="checkBox" onclick="${selectAllCheckBoxes}">
+                        <div class="checkBoxContainer teacherMain-checkBox" onclick="(${selectAllCheckBoxes.toString()})(this, '${role}')">
+                            <div class="checkBox">
+                                <div class="checkBoxContent">
+                                    <span class="material-symbols-outlined icon">
+                                        check
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </th>
                     <th>Uczeń</th>
                     <th>E-mail</th>
@@ -52,6 +71,7 @@ export default async function teachers(startOfURL, token) {
                     <th>Adres</th>
                     <th>Miasto</th>
                     <th>Grupa</th>
+                    <th class="data-edit">Edycja</th>
                 </tr>
                 ${teachersTable}
             </table>`;

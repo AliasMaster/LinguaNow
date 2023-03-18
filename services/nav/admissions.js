@@ -1,3 +1,8 @@
+import checkBoxes from './checkBoxes.js';
+
+const { selectAllCheckBoxes, onchangeCheckBox } = checkBoxes;
+const role = 'admission';
+
 export default async function admissions(startOfURL, token) {
   const response = await fetch(`${startOfURL}/api/admissions`, {
     method: 'GET',
@@ -8,6 +13,7 @@ export default async function admissions(startOfURL, token) {
 
   if (response.ok) {
     const data = await response.json();
+
     return render(data);
   }
 
@@ -18,7 +24,15 @@ export default async function admissions(startOfURL, token) {
       admissionsTable += `
             <tr class="admission-${id}">
                 <td>
-                  <input type="checkbox" class="admission-checkBox checkBox" value="admissions-${id}">
+                    <div class="checkBoxContainer admission-checkBox" id="admission-${id}" onclick="this.classList.toggle('active'); (${onchangeCheckBox})('${role}')">
+                        <div class="checkBox">
+                            <div class="checkBoxContent">
+                                <span class="material-symbols-outlined icon">
+                                    check
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                 <td>${name}</td>
                 <td>${email}</td>
@@ -28,21 +42,19 @@ export default async function admissions(startOfURL, token) {
             </tr>`;
     });
 
-    const selectAllCheckBoxes = `
-      let checkValue = false;
-
-      if (this.checked) {
-        checkValue = true;
-      }
-      const checkBoxes = document.querySelectorAll('.admission-checkBox');
-      checkBoxes.forEach((checkBox) => {
-        checkBox.checked = checkValue;
-      });`;
-
-    return `<table>
+    return `<h2>Zgłoszenia</h2>
+              <table>
                 <tr>
                     <th>
-                      <input type="checkbox" class="checkBox" onclick="${selectAllCheckBoxes}">
+                        <div class="checkBoxContainer admissionMain-checkBox" onclick="(${selectAllCheckBoxes.toString()})(this, '${role}')">
+                            <div class="checkBox">
+                                <div class="checkBoxContent">
+                                    <span class="material-symbols-outlined icon">
+                                        check
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </th>
                     <th>Złaszający</th>
                     <th>E-mail</th>
