@@ -1,0 +1,40 @@
+.message {
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+  position: relative;
+  border-radius: 16px;
+  color: #fff;
+}
+
+.message.error {
+  background-color: #ff3333;
+  padding: 10px 16px;
+  transform: scaleY(1);
+  margin-bottom: 16px;
+}
+
+.message.succed {
+  background-color: #198754;
+  transform: scaleY(1);
+  margin-bottom: 16px;
+  padding: 10px 16px;
+}
+
+.message .icon {
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 50%;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.message .icon:hover {
+  background-color: rgb(0, 0, 0, 0.2);
+}

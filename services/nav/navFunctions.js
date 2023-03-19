@@ -5,4 +5,4 @@ import teachers from './teachers.js';
 import admissions from './admissions.js';
 import groups from './groups.js';
 
-export default { navmessages, logOut, students, teachers, admissions, groups };
+export { navmessages, logOut, students, teachers, admissions, groups };

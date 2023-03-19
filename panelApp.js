@@ -1,7 +1,5 @@
 import startOfURL from './config/CONST.js';
 
-console.log(startOfURL);
-
 import NavController from './services/NavController.js';
 
 if (!localStorage.getItem('token')) {

@@ -72,4 +72,4 @@ function selectAllCheckBoxes(headerCheckBox, role) {
   }
 }
 
-export default { onchangeCheckBox, selectAllCheckBoxes };
+export { onchangeCheckBox, selectAllCheckBoxes };

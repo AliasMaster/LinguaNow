@@ -249,12 +249,15 @@ table th {
 
 table {
   border-collapse: collapse;
+  position: relative;
+  z-index: 1;
   border-radius: 16px;
-  border-style: hidden; /* hide standard table (collapsed) border */
-  box-shadow: 0 0 0 1px #666; /* this draws the table border  */
+  border-style: hidden;
+  box-shadow: 0 0 25px -10px #000;
   width: 100%;
   font-size: 14px;
   overflow: hidden;
+  background-color: #fffbfe;
 }
 
 th:first-of-type,
@@ -299,4 +302,98 @@ td.data-edit {
 
 .data-edit .icon {
   cursor: pointer;
+}
+
+/* button */
+
+button {
+  background-color: #6750a4;
+  box-shadow: 0 0 15px -10px #000;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 40px;
+  font-weight: 500;
+  border-radius: 40px;
+  padding: 0 24px;
+  display: inline;
+  align-items: center;
+  letter-spacing: 1.25px;
+  cursor: pointer;
+}
+
+button.delete + table {
+  margin-top: -40px;
+}
+
+tbody {
+  background-color: #fffbfe;
+}
+
+h2 {
+  letter-spacing: -1.5px;
+}
+
+h3 {
+  letter-spacing: -0.5px;
+}
+
+h4 {
+  letter-spacing: 0;
+}
+
+h5 {
+  letter-spacing: 0.25px;
+}
+
+table {
+  transition: margin-top 0.3s ease;
+}
+
+table:has(tbody):has(tr):has(th):has(.checkBoxContainer.active),
+table.delete:has(.checkBoxContainer.indeterminate) {
+  margin-top: 8px;
+}
+
+button:hover {
+  opacity: 0.95;
+}
+
+/* dialog box */
+.dialog {
+  display: none;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  height: 100svh;
+  width: 100vw;
+  background-color: rgb(0, 0, 0, 0.4);
+}
+
+.dialog.active {
+  display: grid;
+  place-content: center;
+}
+
+.dialogContent {
+  background-color: #fffbfe;
+  border-radius: 16px;
+  padding: 16px 32px;
+}
+
+h2 {
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.dialog .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
 }

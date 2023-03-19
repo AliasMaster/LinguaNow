@@ -1,9 +1,13 @@
 import GetNav from './GetNav.js';
 import renderContent from './render.js';
-import navFunctions from './nav/navFunctions.js';
-
-const { logOut, navmessages, students, teachers, admissions, groups } =
-  navFunctions;
+import {
+  logOut,
+  navmessages,
+  students,
+  teachers,
+  admissions,
+  groups,
+} from './nav/navFunctions.js';
 
 export default class NavController {
   constructor(startOfURL, token) {

@@ -1,7 +1,3 @@
-import checkBoxes from './checkBoxes.js';
-import edit from './edit.js';
-
-const { selectAllCheckBoxes, onchangeCheckBox } = checkBoxes;
 const role = 'student';
 
 export default async function students(startOfURL, token) {
@@ -25,7 +21,7 @@ export default async function students(startOfURL, token) {
       studentsTable += `
             <tr class="student-${id}">
                 <td>
-                    <div class="checkBoxContainer student-checkBox" id="student-${id}" onclick="this.classList.toggle('active'); (${onchangeCheckBox})('${role}')">
+                    <div class="checkBoxContainer student-checkBox" id="student-${id}" aria-name="${name}" onclick="this.classList.toggle('active'); onchangeCheckBox('${role}')">
                         <div class="checkBox">
                             <div class="checkBoxContent">
                                 <span class="material-symbols-outlined icon">
@@ -43,7 +39,7 @@ export default async function students(startOfURL, token) {
                 <td class="data-group">${group}</td>
                 <td class="data-edit">
                   <div class="editContainer">
-                    <span class="material-symbols-outlined icon" onclick="(${edit.toString()})(this.parentElement.parentElement.parentElement)">
+                    <span class="material-symbols-outlined icon" onclick="edit(this.parentElement.parentElement.parentElement, '${role}')">
                       edit
                     </span>
                   </div>
@@ -51,11 +47,14 @@ export default async function students(startOfURL, token) {
             </tr>`;
     });
 
-    return `<h2>Uczniowie</h2>
+    return `
+            <div class="message"></div>
+            <h2>Uczniowie</h2>
+              <button class="delete" onclick="deleteRows('${role}')">Usuń</button>
               <table>
                 <tr>
                     <th>
-                        <div class="checkBoxContainer studentMain-checkBox" onclick="(${selectAllCheckBoxes.toString()})(this, '${role}')">
+                        <div class="checkBoxContainer studentMain-checkBox" onclick="selectAllCheckBoxes(this, '${role}')">
                             <div class="checkBox">
                                 <div class="checkBoxContent">
                                     <span class="material-symbols-outlined icon">
@@ -74,6 +73,9 @@ export default async function students(startOfURL, token) {
                     <th class="data-edit">Edycja</th>
                 </tr>
                 ${studentsTable}
-            </table>`;
+            </table>
+            <div class="dialog">
+              <div class="dialogContent"></div>
+            </div>`;
   }
 }

@@ -1,6 +1,3 @@
-import checkBoxes from './checkBoxes.js';
-
-const { selectAllCheckBoxes, onchangeCheckBox } = checkBoxes;
 const role = 'admission';
 
 export default async function admissions(startOfURL, token) {
@@ -24,7 +21,7 @@ export default async function admissions(startOfURL, token) {
       admissionsTable += `
             <tr class="admission-${id}">
                 <td>
-                    <div class="checkBoxContainer admission-checkBox" id="admission-${id}" onclick="this.classList.toggle('active'); (${onchangeCheckBox})('${role}')">
+                    <div class="checkBoxContainer admission-checkBox" id="admission-${id}" aria-name="${name}" onclick="this.classList.toggle('active'); onchangeCheckBox('${role}')">
                         <div class="checkBox">
                             <div class="checkBoxContent">
                                 <span class="material-symbols-outlined icon">
@@ -42,27 +39,33 @@ export default async function admissions(startOfURL, token) {
             </tr>`;
     });
 
-    return `<h2>Zgłoszenia</h2>
-              <table>
-                <tr>
-                    <th>
-                        <div class="checkBoxContainer admissionMain-checkBox" onclick="(${selectAllCheckBoxes.toString()})(this, '${role}')">
-                            <div class="checkBox">
-                                <div class="checkBoxContent">
-                                    <span class="material-symbols-outlined icon">
-                                        check
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </th>
-                    <th>Złaszający</th>
-                    <th>E-mail</th>
-                    <th>Telefon</th>
-                    <th>Kurs</th>
-                    <th>Data</th>
-                </tr>
-                ${admissionsTable}
-            </table>`;
+    return `
+            <div class="message"></div>
+            <h2>Zgłoszenia</h2>
+            <button class="delete" onclick="deleteRows('${role}')">Usuń</button>
+            <table>
+              <tr>
+                  <th>
+                      <div class="checkBoxContainer admissionMain-checkBox" onclick="selectAllCheckBoxes(this, '${role}')">
+                          <div class="checkBox">
+                              <div class="checkBoxContent">
+                                  <span class="material-symbols-outlined icon">
+                                      check
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                  </th>
+                  <th>Złaszający</th>
+                  <th>E-mail</th>
+                  <th>Telefon</th>
+                  <th>Kurs</th>
+                  <th>Data</th>
+              </tr>
+              ${admissionsTable}
+          </table>
+          <div class="dialog">
+            <div class="dialogContent"></div>
+          </div>`;
   }
 }
