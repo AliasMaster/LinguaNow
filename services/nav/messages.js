@@ -15,42 +15,60 @@ export default async function navmessages(startOfURL, token) {
     let givenMessages = '';
 
     data.given.forEach(({ subject, from, role, message, date }) => {
-      givenMessages += `<div class="message">
-                <div class="messageHeader">
-                    <h3>Od: ${from} <span class="role">${role}</span></h3>
-                    <h4>Temat: ${subject} <span class="date">${date}</span></h4>
-                </div>
-                <div class="messegeContent">
-                    ${message}
-                </div>
-            </div>`;
+      givenMessages += `
+          <div class="messageBox">
+              <div class="messageHeader" onclick="this.parentElement.classList.toggle('active')">
+                  <h3>
+                    Od: ${from} <span class="role">${role}</span>
+                    <p class="date">${date}</p>
+                  </h3>
+                  <h4>Temat: <span class="subject">${subject}</span></h4>
+                  <span class="material-symbols-outlined expandMore">
+                    expand_more
+                  </span>
+              </div>
+              <div class="divider"></div>
+              <div class="messageContent">
+                  ${message}
+              </div>
+          </div>`;
     });
 
     let sendedMessages = '';
 
     data.sended.forEach(({ subject, to, role, message, date }) => {
-      sendedMessages += `<div class="message">
-                <div class="messageHeader">
-                    <h3>Od: ${to} <span class="role">${role}</span></h3>
-                    <h4>Temat: ${subject} <span class="date">${date}</span></h4>
+      sendedMessages += `
+            <div class="messageBox">
+                <div class="messageHeader" onclick="this.parentElement.classList.toggle('active')">
+                    <h3>
+                      Do: ${to} <span class="role">${role}</span>
+                      <p class="date">${date}</p>
+                    </h3>
+                    <h4>Temat: <span class="subject">${subject}</span></h4>
+                    <span class="material-symbols-outlined expandMore">
+                      expand_more
+                    </span>
                 </div>
-                <div class="messegeContent">
+                <div class="divider"></div>
+                <div class="messageContent">
                     ${message}
                 </div>
             </div>`;
     });
 
-    return `<div class="messages">
-            <div class="given">
+    return `
+        <div class="messagesContainer">
+            <div class="given messages">
                 <header>
-                    <h2>Otrzymane</h2>
-                <div class="messages">${givenMessages}</div>
+                  <h2>Otrzymane</h2>
+                </header>
+                <div class="userMessages">${givenMessages}</div>
             </div>
-            <div class="sended">
+            <div class="sended messages">
                 <header>
                     <h2>Wysłane</h2>
                 </header>
-                <div class="messages">${sendedMessages}</div>
+                <div class="userMessages">${sendedMessages}</div>
 
             </div>
         </div>`;

@@ -1,5 +1,5 @@
 function message(ok, message) {
-  const messageBox = document.querySelector('.message');
+  const messageBox = document.querySelector('.sliderMessage');
   let className;
   if (ok) {
     className = 'succed';

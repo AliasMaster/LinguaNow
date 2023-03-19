@@ -40,7 +40,7 @@ export default async function admissions(startOfURL, token) {
     });
 
     return `
-            <div class="message"></div>
+            <div class="sliderMessage"></div>
             <h2>Zgłoszenia</h2>
             <button class="delete" onclick="deleteRows('${role}')">Usuń</button>
             <table>

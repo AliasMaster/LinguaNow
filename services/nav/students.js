@@ -48,7 +48,7 @@ export default async function students(startOfURL, token) {
     });
 
     return `
-            <div class="message"></div>
+            <div class="sliderMessage"></div>
             <h2>Uczniowie</h2>
               <button class="delete" onclick="deleteRows('${role}')">Usuń</button>
               <table>

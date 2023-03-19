@@ -128,6 +128,7 @@ aside {
   height: 65px;
   color: #49454e;
   transition: height 0.6s ease-in-out;
+  cursor: default;
 }
 
 .group .card {
@@ -137,10 +138,6 @@ aside {
   align-items: center;
   border-radius: 16px;
   padding: 8px 16px;
-}
-
-.card:hover {
-  background-color: #cfc9d4;
 }
 
 .group .expand {
@@ -382,6 +379,7 @@ button:hover {
   background-color: #fffbfe;
   border-radius: 16px;
   padding: 16px 32px;
+  box-shadow: 0 0 50px -10px #000;
 }
 
 h2 {
@@ -396,4 +394,135 @@ h2 {
   align-items: center;
   gap: 8px;
   margin-top: 8px;
+}
+
+.dialog .input-container {
+  position: relative;
+}
+
+.dialog p {
+  text-transform: capitalize;
+}
+
+.dialog input {
+  height: 48px;
+  width: 280px;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.dialog .label {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.dialog input,
+.label .text {
+  font-size: 16px;
+}
+
+.dialog input:focus {
+  outline: none;
+  border: 2px solid blue;
+}
+
+.dialog input:focus + .label .text {
+  font-size: 12px;
+  transform: translate(0, -140%);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: blue;
+}
+
+.dialog .label .text {
+  transition: all 0.15s ease-out;
+}
+
+/* messeges */
+
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.userMessages {
+  height: 40vh;
+  height: 40svh;
+  overflow: auto;
+  padding: 16px;
+  box-shadow: 0 0 15px -10px #000;
+  border-radius: 16px;
+}
+
+.messageBox {
+  color: #000;
+  box-shadow: 0 0 15px -10px #000;
+  border-radius: 16px;
+  padding-bottom: 0;
+  max-height: 80px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  margin-bottom: 20px;
+}
+
+.messageBox.active {
+  max-height: 500px;
+}
+
+.messages h3,
+.messages p,
+.messages h4 {
+  margin: 0;
+}
+
+.messageHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 80px;
+  cursor: pointer;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.messages .role,
+.messages .subject,
+.messages .date {
+  color: var(--onSurfaceSecondary);
+  font-weight: normal;
+}
+
+.date {
+  font-size: 0.9rem;
+}
+
+.messageContent {
+  overflow: auto;
+}
+
+.messages .divider {
+  margin: 0;
+}
+
+.messageBox:hover .expandMore {
+  background-color: #c4c7c5;
+}
+
+.messageBox.active .expandMore {
+  transform: rotate(-180deg);
+  transition-delay: 0s;
+}
+
+.messageContent {
+  padding: 16px;
 }

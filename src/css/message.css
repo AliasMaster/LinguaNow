@@ -1,4 +1,4 @@
-.message {
+.sliderMessage {
   position: relative;
   width: 100%;
   top: 0;
@@ -11,21 +11,21 @@
   color: #fff;
 }
 
-.message.error {
+.sliderMessage.error {
   background-color: #ff3333;
   padding: 10px 16px;
   transform: scaleY(1);
   margin-bottom: 16px;
 }
 
-.message.succed {
+.sliderMessage.succed {
   background-color: #198754;
   transform: scaleY(1);
   margin-bottom: 16px;
   padding: 10px 16px;
 }
 
-.message .icon {
+.sliderMessage .icon {
   cursor: pointer;
   padding: 3px;
   border-radius: 50%;
@@ -35,6 +35,6 @@
   transform: translateY(-50%);
 }
 
-.message .icon:hover {
+.sliderMessage .icon:hover {
   background-color: rgb(0, 0, 0, 0.2);
 }

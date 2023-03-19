@@ -19,7 +19,17 @@ function edit(row, role) {
   dialogContent += `
     <div>
       <p>${role}: ${userData.name}</p>
-      Grupa: <input type="number" id="editGroupId">
+      <div class="input-container">
+        <input
+          type="number"
+          id="editGroupId"
+          value=""
+          aria-labelledby="label-group"
+        />
+        <label class="label" for="editGroupId" id="label-fname">
+          <div class="text">Grupa</div>
+        </label>
+      </div>
     </div>
   `;
 
@@ -56,8 +66,10 @@ async function updateInDatabase(usersData, role, id) {
     const data = response.json();
 
     message(response.ok, data.message);
-    const row = document.querySelector(`.${role}-${id}`);
-    row.querySelector('.data-group').innerHTML = groupId.groupdId;
+    if (response.ok) {
+      const row = document.querySelector(`.${role}-${id}`);
+      row.querySelector('.data-group').innerHTML = groupId.groupdId;
+    }
   } else {
     message(false, 'Nie wybrano grupy');
   }
