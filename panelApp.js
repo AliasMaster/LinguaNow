@@ -1,9 +1,11 @@
 import startOfURL from './config/CONST.js';
 
+console.log(startOfURL);
+
 import NavController from './services/NavController.js';
 
 if (!localStorage.getItem('token')) {
-  window.location.href = `${startOfURL}/`;
+  window.location.href = `${startOfURL}`;
 }
 
 const token = localStorage.getItem('token');

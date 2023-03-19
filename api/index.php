@@ -24,10 +24,14 @@ set_exception_handler("ErrorHandler::handleException");
 
 header("Content-type: application/json; charset=UTF-8");
 
+$parts = $_SERVER['REQUEST_URI'];
+
 $parts = explode('/', $_SERVER['REQUEST_URI']);
 
-$path = $parts[2] ?? null;
-$id = $parts[3] ?? null;
+$indexOfApi = array_search('api', $parts);
+
+$path = $parts[$indexOfApi + 1] ?? null;
+$id = $parts[$indexOfApi + 2] ?? null;
 
 $database = new Database;
 
