@@ -32,7 +32,7 @@ class Users
 
     public function getAll($userId)
     {
-        $sql = "SELECT CONCAT(fname, ' ', lname) as name, password, email, id, accessLevel FROM users WHERE id <> :id";
+        $sql = "SELECT CONCAT(fname, ' ', lname) as name, email, id, accessLevel FROM users WHERE id <> :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(":id", $userId, PDO::PARAM_INT);
         $stmt->execute();
@@ -67,8 +67,6 @@ class Users
                 "name" => $row['name'],
                 "role" => getRole($row['accessLevel']),
                 "email" => $row['email'],
-                "password" => $row['password'],
-                "hashPassword" => password_hash($row['password'], PASSWORD_ARGON2I)
             ]);
         }
 

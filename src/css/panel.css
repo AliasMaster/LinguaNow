@@ -526,3 +526,7 @@ h2 {
 .messageContent {
   padding: 16px;
 }
+
+.buttonMessage {
+  margin-bottom: 16px;
+}

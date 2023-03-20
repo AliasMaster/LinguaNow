@@ -56,8 +56,13 @@ export default async function navmessages(startOfURL, token) {
             </div>`;
     });
 
+    const addButton = `
+      <button onclick="addMessage()" class="buttonMessage">Napisz wiadomość</button>
+    `;
+
     return `
-        <div class="messagesContainer">
+    ${addButton}
+    <div class="messagesContainer">
             <div class="given messages">
                 <header>
                   <h2>Otrzymane</h2>
@@ -71,6 +76,9 @@ export default async function navmessages(startOfURL, token) {
                 <div class="userMessages">${sendedMessages}</div>
 
             </div>
+        </div>
+        <div class="dialog">
+          <div class="dialogContent"></div>
         </div>`;
   }
 }
