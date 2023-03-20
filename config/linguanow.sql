@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 19 Mar 2023, 23:45
+-- Czas generowania: 20 Mar 2023, 18:28
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.1.6
 
@@ -158,7 +158,6 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `fromId`, `toId`, `subject`, `message`, `date`) VALUES
-(1, 1, 2, 'Przywitanie', 'Witam!', '2023-03-13 08:20:22'),
 (2, 2, 1, 'Witaj', 'Co tam?', '2023-03-13 23:41:14'),
 (138, 1, 2, 'Ważna informacja', 'To jest krótka wiadomość.', '2023-03-19 09:00:00'),
 (139, 3, 4, 'Temat wiadomości', 'To jest długa wiadomość, która ma na celu przetestowanie funkcjonalności systemu.', '2023-03-18 12:34:56'),
@@ -289,8 +288,8 @@ INSERT INTO `users` (`id`, `email`, `password`, `fname`, `lname`, `phone`, `addr
 (1, 'jkowalski@example.com', '$2y$10$9a3cskedJroiqzB5Z5ZDtOnk3liVxfP/BGyC02VfPMeJapMx3DB22', 'Jan', 'Kowalski', '111-222-333', 'ul. Główna 1', 'Warszawa', 2),
 (2, 'anowak@example.com', '$2y$10$p8LElA/kgwoVCoPmyCR6KOZa0xJHNGwzEZbI6jQzM9JhZuyErk3fK', 'Anna', 'Nowak', '222-111-333', 'ul. Słoneczna 5', 'Kraków', 2),
 (3, 'pwisniewski@example.com', '$2y$10$jACnnuK.JtaD7Cs806QAUOxHqAB6HqDrD9pl9kEl.x1AZYT.eGGuC', 'Piotr', 'Wiśniewski', '333-222-111', 'ul. Zielona 10', 'Gdańsk', 2),
-(4, 'janek@example.com', '$2y$10$HvZBdyVKH1WrU6czpScO8unpYf97oiyFur/pBwHapwMopIBXGBNOS', 'Jan', 'Kowalski', '234-242-131', 'ul. Nowa 10', 'Warszawa', 3),
-(5, 'ania@example.com', '$2y$10$YRmOq0TluyGT99ykk6rvg.0xbyiVnRLv8XQ4J1aQkYKJotVnw2tZu', 'Anna', 'Nowak', '878-424-243', 'ul. Kwiatowa 3', 'Kraków', 3),
+(4, 'janek@example.com', '$2y$10$HvZBdyVKH1WrU6czpScO8unpYf97oiyFur/pBwHapwMopIBXGBNOS', 'Jan', 'Kowalczyk', '234-242-131', 'ul. Nowa 10', 'Warszawa', 3),
+(5, 'ania@example.com', '$2y$10$YRmOq0TluyGT99ykk6rvg.0xbyiVnRLv8XQ4J1aQkYKJotVnw2tZu', 'Anna', 'Kwaśniewska', '878-424-243', 'ul. Kwiatowa 3', 'Kraków', 3),
 (6, 'tomek@example.com', '$2y$10$QGkpwNa5xOTMM2Xyfp/VXOa4m0/waaGM902tYniBKtIlSCBfIJ7FW', 'Tomasz', 'Wójcik', '872-422-423', 'ul. Zielona 7', 'Poznań', 3),
 (7, 'kasia@example.com', '$2y$10$a.xRZuKVqo9aybVQzPhTWOQPL2DE.KWF5qfUhvnwdCFxt3U4o0BVW', 'Katarzyna', 'Kowalczyk', '472-894-734', 'ul. Lipowa 2', 'Gdańsk', 3),
 (8, 'pawel@example.com', '$2y$10$n.PARMfkesvSDnyj7Hd3GePWX4L/31JyONYNd0LwgVJhe3dXYcskm', 'Paweł', 'Kaczmarek', '876-432-132', 'ul. Czerwona 5', 'Łódź', 3),
@@ -363,7 +362,7 @@ ALTER TABLE `marks`
 -- AUTO_INCREMENT dla tabeli `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT dla tabeli `students`

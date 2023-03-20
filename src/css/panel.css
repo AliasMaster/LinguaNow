@@ -380,6 +380,7 @@ button:hover {
   border-radius: 16px;
   padding: 16px 32px;
   box-shadow: 0 0 50px -10px #000;
+  min-width: 400px;
 }
 
 h2 {
@@ -400,13 +401,9 @@ h2 {
   position: relative;
 }
 
-.dialog p {
-  text-transform: capitalize;
-}
-
 .dialog input {
   height: 48px;
-  width: 280px;
+  width: 100%;
   border: 1px solid #c0c0c0;
   border-radius: 4px;
   box-sizing: border-box;
@@ -419,13 +416,19 @@ h2 {
   bottom: 0;
   left: 16px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding: 12px 0;
   pointer-events: none;
 }
 
 .dialog input,
-.label .text {
+.dialog .label .text {
   font-size: 16px;
+}
+
+.dialog .label .text {
+  transition: all 0.15s ease-out;
+  color: grey;
 }
 
 .dialog input:focus {
@@ -433,17 +436,17 @@ h2 {
   border: 2px solid blue;
 }
 
-.dialog input:focus + .label .text {
+.dialog input:focus + .label .text,
+.dialog input:not(input[value='']) + .label .text {
   font-size: 12px;
-  transform: translate(0, -140%);
+  transform: translate(0, -115%);
   background-color: white;
   padding-left: 4px;
   padding-right: 4px;
-  color: blue;
 }
 
-.dialog .label .text {
-  transition: all 0.15s ease-out;
+.dialog input:focus + .label .text {
+  color: blue;
 }
 
 /* messeges */
@@ -529,4 +532,48 @@ h2 {
 
 .buttonMessage {
   margin-bottom: 16px;
+}
+
+/* add message */
+
+.dialog textarea {
+  height: 320px;
+  width: 100%;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+  resize: none;
+}
+
+.dialog textarea {
+  font-size: 16px;
+}
+
+.dialog textarea:focus {
+  outline: none;
+  border: 2px solid blue;
+}
+
+.dialog textarea:focus + .label .text,
+.dialog textarea:not(textarea[value='']) + .label .text {
+  font-size: 12px;
+  transform: translate(0, -115%);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.dialog textarea:focus + .label .text {
+  color: blue;
+}
+
+.dialogForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dialog select {
+  width: 100%;
 }

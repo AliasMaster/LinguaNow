@@ -1,7 +1,6 @@
 {
     "toDo": {
         "important": [
-            "Przycisk oraz obsługa dodawania wiadomości",
             "oceny",
             "api do usuwania uczniów/nauczycieli/zgłoszeń",
             "api do aktualizowania uczniów/naczycieli",

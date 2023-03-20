@@ -61,6 +61,7 @@ export default async function navmessages(startOfURL, token) {
     `;
 
     return `
+    <div class="sliderMessage"></div>
     ${addButton}
     <div class="messagesContainer">
             <div class="given messages">

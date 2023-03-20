@@ -48,6 +48,7 @@ function edit(row, role) {
 
   dialogBoxContent.innerHTML = dialogContent;
   dialogBoxContent.innerHTML += buttons;
+  inputs();
 }
 
 async function updateInDatabase(usersData, role, id) {
