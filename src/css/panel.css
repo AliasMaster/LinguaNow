@@ -577,3 +577,40 @@ h2 {
 .dialog select {
   width: 100%;
 }
+
+/* select */
+
+.dialog .input-container {
+  position: relative;
+}
+
+.dialog select {
+  height: 48px;
+  width: 100%;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+.dialog select {
+  font-size: 16px;
+}
+
+.dialog select:focus {
+  outline: none;
+  border: 2px solid blue;
+}
+
+.dialog select:focus + .label .text,
+.dialog select:not(select[value='']) + .label .text {
+  font-size: 12px;
+  transform: translate(0, -115%);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.dialog select:focus + .label .text {
+  color: blue;
+}

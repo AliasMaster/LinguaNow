@@ -52,16 +52,21 @@ async function filterUsers(users) {
   }
 
   return `
-    <select name="userSelect" id="userSelect">
-        <option value="deafault" disabled selected>Wybierz użytkownika</option>
-            ${optionGroup}
+    <div class="input-container">
+      <select name="userSelect" id="dialogSelect" value="">
+      <option value="" disabled selected></option>
+          ${optionGroup}
         <optgroup label="Nauczyciele" class="teachers">
-            ${teachersOption}
+          ${teachersOption}
         </optgroup>
         <optgroup label="Uczniowie" class="students">
-            ${studentsOption}
+          ${studentsOption}
         </optgroup>
-    </select>
+      </select>
+      <label class="label" for="dialogSelect" id="label-user">
+        <div class="text">Wybierz</div>
+      </label>
+    </div>
   `;
 }
 
@@ -115,7 +120,7 @@ async function insertToDialogBox(select) {
 
 async function sendMessage() {
   const dialogBox = document.querySelector('.dialog');
-  const userSelect = dialogBox.querySelector('#userSelect').value;
+  const userSelect = dialogBox.querySelector('#dialogSelect').value;
 
   const dialogSelect = userSelect.substring(userSelect.indexOf('-') + 1);
   const dialogSubject = dialogBox.querySelector('#dialogSubject').value;
