@@ -12,15 +12,15 @@ class Teachers
 
         $this->conn = $database->getConnection();
 
-        if ($method == "GET" ) {
-            if(isset($token->token) && $token->token == 1) {
+        if ($method == "GET") {
+            if (isset($token->token) && $token->token == 1) {
                 $this->getByToken($token);
             } else {
                 $this->getAll();
             }
 
             exit;
-        }else {
+        } else {
             http_response_code(401);
             echo json_encode([
                 'message' => 'Access denied'
@@ -57,7 +57,7 @@ class Teachers
 
     public function getByToken()
     {
-        $sql = "SELECT CONCAT(fname, ' ', lname) as name, users.id, email, city, address, phone, groups.id as groupId FROM users INNER JOIN groups ON groups.teacher = users.id";
+        $sql = "SELECT CONCAT(fname, ' ', lname) as name, users.id, email, city, address, phone, groupId FROM users INNER JOIN teachers ON teachers.userId = users.id;";
 
         $result = $this->conn->query($sql);
 

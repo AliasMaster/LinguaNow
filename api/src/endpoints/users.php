@@ -20,6 +20,17 @@ class Users
         } else {
             if ($method == "DELETE" && $token->token == 1) {
                 $this->deleteUser($id);
+            } else if ($method == "PUT" && $token->token == 1) {
+                $data = json_decode(file_get_contents("php://input"));
+                if (isset($data->groupId) && !empty($data->groupId)) {
+
+                    $this->put($id, $data->groupId);
+                } else {
+                    echo json_encode([
+                        'message' => 'Access denied'
+                    ]);
+                    exit;
+                }
             } else {
                 http_response_code(401);
                 echo json_encode([
@@ -104,6 +115,38 @@ class Users
         echo json_encode([
             "message" => "Usunięto pomyślnie",
             "userId" => $id
+        ]);
+    }
+
+    public function put($id, $groupId)
+    {
+        $findSql = "SELECT * FROM users WHERE id=:id";
+        $findStmt = $this->conn->prepare($findSql);
+        $findStmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $findStmt->execute();
+
+        if ($findStmt->rowCount() != 1) {
+            http_response_code(404);
+            echo json_encode(["message" => "user not found"]);
+            exit;
+        }
+
+        $updateGroupInUsers = "UPDATE students SET groupId = :groupId WHERE userId = :id";
+        $stmt = $this->conn->prepare($updateGroupInUsers);
+        $stmt->bindValue(":groupId", $groupId, PDO::PARAM_INT);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $updateGroupInUsers = "UPDATE teachers SET groupId = :groupId WHERE userId = :id";
+        $stmt = $this->conn->prepare($updateGroupInUsers);
+        $stmt->bindValue(":groupId", $groupId, PDO::PARAM_INT);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        echo json_encode([
+            "message" => "Zaktualizowano pomyślnie",
+            "id" => $id,
+            "groupId" => $groupId
         ]);
     }
 }

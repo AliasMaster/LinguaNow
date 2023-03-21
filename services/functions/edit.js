@@ -38,11 +38,7 @@ function edit(row, role) {
   const buttons = `
     <div class='buttons'>
       <button onclick='cancel(this.parentElement.parentElement.parentElement)'>Anuluj</button>
-      <button onclick='updateInDatabase(${JSON.stringify(
-        userData,
-      )}, "${role}", ${
-    userData.id
-  }); cancel(this.parentElement.parentElement.parentElement);'>Edytuj</button>
+      <button onclick='updateInDatabase("${role}", ${userData.id}); cancel(this.parentElement.parentElement.parentElement);'>Edytuj</button>
     </div>
   `;
 
@@ -51,25 +47,23 @@ function edit(row, role) {
   inputs();
 }
 
-async function updateInDatabase(usersData, role, id) {
-  const groupId = { groupdId: document.querySelector('#editGroupId').value };
-  if (!groupId.groupdId == '') {
-    const dataForm = { ...usersData, ...groupId };
-
-    const response = await fetch(`${startOfURL}/api/${role}s`, {
+async function updateInDatabase(role, id) {
+  const groupId = document.querySelector('#editGroupId').value;
+  if (!groupId == '') {
+    const response = await fetch(`${startOfURL}/api/users/${id}`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(dataForm),
+      body: JSON.stringify({ groupId: groupId }),
     });
 
-    const data = response.json();
+    const data = await response.json();
 
-    message(response.ok, data.message);
     if (response.ok) {
       const row = document.querySelector(`.${role}-${id}`);
-      row.querySelector('.data-group').innerHTML = groupId.groupdId;
+      row.querySelector('.data-group').innerHTML = groupId;
+      message(response.ok, data.message);
     }
   } else {
     message(false, 'Nie wybrano grupy');

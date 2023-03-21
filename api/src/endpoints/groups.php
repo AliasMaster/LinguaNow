@@ -35,7 +35,7 @@ class Groups
 
     public function getAll()
     {
-        $getGroups = "SELECT CONCAT(fname, ' ', lname) as teacher, groups.id FROM users INNER JOIN teachers ON teachers.userId = users.id INNER JOIN groups ON groups.teacher = teachers.id";
+        $getGroups = "SELECT CONCAT(fname, ' ', lname) as teacher, teachers.groupId FROM users INNER JOIN teachers ON teachers.userId = users.id ORDER BY teachers.groupId";
 
         $groupsStmt = $this->conn->prepare($getGroups);
 
@@ -48,7 +48,7 @@ class Groups
         $groups = [];
 
         while ($groupRow = $groupsStmt->fetch(PDO::FETCH_ASSOC)) {
-            $studentsStmt->bindValue(":group", $groupRow['id'], PDO::PARAM_INT);
+            $studentsStmt->bindValue(":group", $groupRow['groupId'], PDO::PARAM_INT);
             $studentsStmt->execute();
 
             $students = [];
@@ -58,7 +58,7 @@ class Groups
             }
 
             array_push($groups, [
-                "group" => $groupRow['id'],
+                "group" => $groupRow['groupId'],
                 "teacher" => $groupRow['teacher'],
                 "students" => $students
             ]);

@@ -2,7 +2,6 @@
     "toDo": {
         "important": [
             "oceny",
-            "api do aktualizowania uczniów/naczycieli",
             "strona główna w panelu",
             "media queries",
             "messages po wysłaniu formularza ze stopki"
