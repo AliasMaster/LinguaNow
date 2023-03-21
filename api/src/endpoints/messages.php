@@ -40,7 +40,7 @@ class Messages
                     ]);
                     exit;
                 } else {
-                    $this->post($userId, $data->recipient, $data->subject, $data->message);
+                    $this->post($userId, $data->recipient, $data->subject, "<pre>" . $data->message . "</pre>");
                 }
                 break;
             default:

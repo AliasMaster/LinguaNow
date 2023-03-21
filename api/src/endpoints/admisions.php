@@ -12,15 +12,27 @@ class Admissions
 
         $this->conn = $database->getConnection();
 
-        if ($method == "GET" && $token == 1) {
-            $this->getAll($token);
-            exit;
+        if (!$id) {
+            if ($method == "GET" && $token == 1) {
+                $this->getAll($token);
+                exit;
+            } else {
+                http_response_code(401);
+                echo json_encode([
+                    'message' => 'Access denied'
+                ]);
+                exit;
+            }
         } else {
-            http_response_code(401);
-            echo json_encode([
-                'message' => 'Access denied'
-            ]);
-            exit;
+            if ($method == "DELETE" && $token == 1) {
+                $this->delete($id);
+            } else {
+                http_response_code(401);
+                echo json_encode([
+                    'message' => 'Access denied'
+                ]);
+                exit;
+            }
         }
     }
 
@@ -44,5 +56,29 @@ class Admissions
         }
 
         echo json_encode($user);
+    }
+
+    public function delete($id)
+    {
+        $findSql = "SELECT * FROM admissions WHERE id=:id";
+        $findStmt = $this->conn->prepare($findSql);
+        $findStmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $findStmt->execute();
+
+        if ($findStmt->rowCount() != 1) {
+            http_response_code(404);
+            echo json_encode(["message" => "user not found"]);
+            exit;
+        }
+
+        $deleteSql = "DELETE FROM admissions WHERE id=:id";
+        $stmt = $this->conn->prepare($deleteSql);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        echo json_encode([
+            "message" => "Usunięto pomyślnie",
+            "userId" => $id
+        ]);
     }
 }

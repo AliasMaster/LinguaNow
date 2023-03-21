@@ -513,6 +513,11 @@ h2 {
   overflow: auto;
 }
 
+.messageContent pre {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .messages .divider {
   margin: 0;
 }
@@ -544,6 +549,8 @@ h2 {
   box-sizing: border-box;
   padding: 16px;
   resize: none;
+  font-family: 'Open Sans', sans-serif;
+  white-space: pre-wrap;
 }
 
 .dialog textarea {

@@ -70,7 +70,7 @@ class Users
             ]);
         }
 
-        echo json_encode([ "users" => $user ]);
+        echo json_encode(["users" => $user]);
     }
 
     public function deleteUser($id)
@@ -86,13 +86,23 @@ class Users
             exit;
         }
 
-        $deleteSql = "DELETE FROM users WHERE id=:id";
-        $stmt = $this->conn->prepare($deleteSql);
+        $deleteSqlInUsers = "DELETE FROM users WHERE id=:id";
+        $stmt = $this->conn->prepare($deleteSqlInUsers);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $deleteSqlInStudents = "DELETE FROM students WHERE userId=:id";
+        $stmt = $this->conn->prepare($deleteSqlInStudents);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $deleteSqlInTeachers = "DELETE FROM teachers WHERE userId=:id";
+        $stmt = $this->conn->prepare($deleteSqlInTeachers);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
 
         echo json_encode([
-            "message" => "delete user successed",
+            "message" => "Usunięto pomyślnie",
             "userId" => $id
         ]);
     }

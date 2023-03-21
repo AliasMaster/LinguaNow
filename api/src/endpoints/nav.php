@@ -51,7 +51,7 @@ class Nav
             case '2':
                 $navUserItems = [
                     $navListItmes['home'],
-                    $navListItmes['groups'],
+                    $navListItmes['marks'],
                     $navListItmes['messages'],
                     $navListItmes['logOut']
                 ];

@@ -1,3 +1,6 @@
+import { students, teachers, admissions } from '../nav/navFunctions.js';
+import renderContent from '../render.js';
+
 import startOfURL from '../../config/CONST.js';
 const token = localStorage.getItem('token');
 
@@ -58,18 +61,52 @@ function cancel(element) {
   element.classList.remove(`active`);
 }
 
-async function deleteInDatabase(usersData, role) {
-  const response = await fetch(`${startOfURL}/api/${role}s`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(usersData),
-  });
+async function deleteInDatabase(users, role) {
+  let endpoint = 'users';
 
-  const data = response.json();
+  if (role === 'admission') {
+    endpoint = 'admissions';
+  }
 
-  message(response.ok, data.message);
+  const messages = await Promise.all(
+    users.map(async ({ id }) => {
+      const cleanId = id.substring(id.indexOf('-') + 1);
+
+      const response = await fetch(`${startOfURL}/api/${endpoint}/${cleanId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      return {
+        ok: response.ok,
+        responseMessage: data.message,
+      };
+    }),
+  );
+
+  let content = '';
+
+  switch (role) {
+    case 'student':
+      content = await students(startOfURL, token);
+      break;
+    case 'teacher':
+      content = await teachers(startOfURL, token);
+      break;
+    case 'admission':
+      content = await admissions(startOfURL, token);
+    default:
+      break;
+  }
+
+  renderContent(content);
+
+  const { ok, responseMessage } = messages.at(-1);
+  message(ok, responseMessage);
 }
 
 export { deleteRows, cancel, deleteInDatabase };

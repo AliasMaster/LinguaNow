@@ -2,7 +2,6 @@
     "toDo": {
         "important": [
             "oceny",
-            "api do usuwania uczniów/nauczycieli/zgłoszeń",
             "api do aktualizowania uczniów/naczycieli",
             "strona główna w panelu",
             "media queries",
