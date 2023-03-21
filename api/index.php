@@ -15,6 +15,7 @@ require_once('./src/endpoints/students.php');
 require_once('./src/endpoints/signIn.php');
 require_once('./src/endpoints/admisions.php');
 require_once('./src/endpoints/groups.php');
+require_once('./src/endpoints/marks.php');
 
 require_once('./src/Controller.php');
 require_once('./src/Token.php');

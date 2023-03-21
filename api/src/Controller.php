@@ -35,6 +35,9 @@ class Controller
             case "groups":
                 new Groups($database, $method, $id);
                 break;
+            case 'marks':
+                new Marks($database, $method, $id);
+                break;
             default:
                 http_response_code(404);
                 echo json_encode([
