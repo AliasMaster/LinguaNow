@@ -23,16 +23,46 @@ class Nav
 
     public function getNavItems($token)
     {
-        $navListItmes = [];
+        $navListItmes = [
+            "home" => ['name' => 'home', "functionName" => "home", "icon" => "home"],
+            "students" => ['name' => 'uczniowie', "functionName" => "students", "icon" => "group"],
+            "teachers" => ['name' => 'nauczyciele', "functionName" => "teachers", "icon" => "group_work"],
+            "admissions" => ['name' => 'zgłoszenia', "functionName" => "admissions", "icon" => "other_admission"],
+            "groups" => ['name' => 'grupy', "functionName" => "groups", "icon" => "groups"],
+            "messages" => ['name' => 'wiadomości', "functionName" => "messages", "icon" => "chat"],
+            "marks" => ['name' => 'oceny', "functionName" => "marks", "icon" => "grade"],
+            "logOut" => ['name' => 'wyloguj się', "functionName" => "logOut", "icon" => "logout"]
+        ];
+
+        $navUserItems = [];
+
         switch ($token) {
             case '1':
-                $navListItmes = ['uczniowie', 'nauczyciele', 'zgłoszenia', 'grupy', 'wiadomości', 'wyloguj się'];
+                $navUserItems = [
+                    $navListItmes['home'],
+                    $navListItmes['students'],
+                    $navListItmes['teachers'],
+                    $navListItmes['admissions'],
+                    $navListItmes['groups'],
+                    $navListItmes['messages'],
+                    $navListItmes['logOut'],
+                ];
                 break;
             case '2':
-                $navListItmes = ['grupy', 'wiadomości', 'wyloguj się'];
+                $navUserItems = [
+                    $navListItmes['home'],
+                    $navListItmes['marks'],
+                    $navListItmes['messages'],
+                    $navListItmes['logOut']
+                ];
                 break;
             case '3':
-                $navListItmes = ['oceny', 'wiadomości', 'wyloguj się'];
+                $navUserItems = [
+                    $navListItmes['home'],
+                    $navListItmes['marks'],
+                    $navListItmes['messages'],
+                    $navListItmes['logOut']
+                ];
                 break;
             default:
                 http_response_code(401);
@@ -44,7 +74,7 @@ class Nav
         }
 
         echo json_encode([
-            "items" => $navListItmes
+            "items" => $navUserItems
         ]);
     }
 }

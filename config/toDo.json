@@ -1,5 +1,17 @@
 {
     "toDo": {
-        "ogarnąć formularz w stopce": 0
+        "important": [
+            "oceny",
+            "strona główna w panelu",
+            "media queries",
+            "messages po wysłaniu formularza ze stopki"
+        ],
+
+        "additional": [
+            "dodać usuwanie grup w dyrektorze",
+            "poprawić css w wiadomościach",
+            "aktualizacja danych użytkownika",
+            "Może avatary"
+        ]
     }
 }

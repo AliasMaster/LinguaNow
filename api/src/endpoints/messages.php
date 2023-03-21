@@ -40,11 +40,14 @@ class Messages
                     ]);
                     exit;
                 } else {
-                    $this->post($userId, $data->recipient, $data->subject, $data->message);
+                    $this->post($userId, $data->recipient, $data->subject, "<pre>" . $data->message . "</pre>");
                 }
                 break;
             default:
-                # code...
+                http_response_code(405);
+                header('Allow: GET, POST');
+                exit;
+                break;
                 break;
         }
     }
@@ -88,7 +91,8 @@ class Messages
                 "to" => $row['name'],
                 "role" => getRole($row['accessLevel']),
                 "subject" => $row['subject'],
-                "message" => $row['message']
+                "message" => $row['message'],
+                "date" => $row['date']
             ]);
         }
 
@@ -107,7 +111,8 @@ class Messages
                 "from" => $row['name'],
                 "role" => getRole($row['accessLevel']),
                 "subject" => $row['subject'],
-                "message" => $row['message']
+                "message" => $row['message'],
+                "date" => $row['date']
             ]);
         }
 
@@ -120,9 +125,10 @@ class Messages
     public function post($senderId, $recipientId, $subject, $message)
     {
         $date = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO messages VALUES(NULL, :fromId, :toId, :subject, :message, :date)";
+        $sql = "INSERT INTO messages VALUES(NULL, :fromId, :toId, :subject, :message, :date);";
 
         $stmt = $this->conn->prepare($sql);
+
 
         $stmt->bindValue(':fromId', $senderId, PDO::PARAM_INT);
         $stmt->bindValue(':toId', $recipientId, PDO::PARAM_INT);
@@ -132,6 +138,43 @@ class Messages
 
         $stmt->execute();
 
-        echo json_encode(["message" => "send succed"]);
+        $lastId = $this->conn->lastInsertId();
+
+        $selectSql = "SELECT users.accessLevel, CONCAT(users.fname, ' ', users.lname) as name FROM users INNER JOIN messages ON toId = users.id WHERE messages.id = $lastId";
+        $result = $this->conn->query($selectSql);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+
+        function getRoleFromSelect($accessLevel)
+        {
+            $role = null;
+            switch ($accessLevel) {
+                case '1':
+                    $role = 'dyrektor';
+                    break;
+                case '2':
+                    $role = 'nauczyciel';
+                    break;
+                case '3':
+                    $role = "uczeń";
+                    break;
+                default:
+                    http_response_code(500);
+                    echo json_encode(["message" => "unhandle query"]);
+                    break;
+            }
+
+            return $role;
+        }
+
+        echo json_encode([
+            "message" => "Wysłano pomyślnie",
+            "data" => [
+                "date" => $date,
+                "to" => $row['name'],
+                "subject" => $subject,
+                "message" => $message,
+                "role" => getRoleFromSelect($row['accessLevel'])
+            ]
+        ]);
     }
 }
