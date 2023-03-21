@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 20 Mar 2023, 18:28
+-- Czas generowania: 22 Mar 2023, 00:26
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.1.6
 
@@ -111,18 +111,17 @@ INSERT INTO `courses` (`id`, `name`, `description`, `type`, `price`) VALUES
 --
 
 CREATE TABLE `groups` (
-  `id` int(11) NOT NULL,
-  `teacher` int(11) NOT NULL
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Zrzut danych tabeli `groups`
 --
 
-INSERT INTO `groups` (`id`, `teacher`) VALUES
-(1, 1),
-(2, 2),
-(3, 3);
+INSERT INTO `groups` (`id`) VALUES
+(1),
+(2),
+(3);
 
 -- --------------------------------------------------------
 
@@ -134,9 +133,16 @@ CREATE TABLE `marks` (
   `id` int(11) NOT NULL,
   `mark` int(11) NOT NULL,
   `studentId` int(11) NOT NULL,
-  `teacherId` int(11) NOT NULL,
-  `groupId` int(11) NOT NULL
+  `description` text COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `marks`
+--
+
+INSERT INTO `marks` (`id`, `mark`, `studentId`, `description`) VALUES
+(1, 4, 4, 'Sprawdzian'),
+(5, 3, 4, 'Kartkówka');
 
 -- --------------------------------------------------------
 
@@ -249,6 +255,7 @@ INSERT INTO `students` (`id`, `userId`, `groupId`) VALUES
 CREATE TABLE `teachers` (
   `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
   `description` text NOT NULL,
   `img` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -257,10 +264,10 @@ CREATE TABLE `teachers` (
 -- Zrzut danych tabeli `teachers`
 --
 
-INSERT INTO `teachers` (`id`, `userId`, `description`, `img`) VALUES
-(1, 1, 'Jan jest nauczycielem z ponad 10-letnim doświadczeniem w nauczaniu języka angielskiego. Jego pasją jest pomaganie swoim uczniom osiągnąć swój pełny potencjał w nauce języka angielskiego. Jan jest ekspertem w zakresie gramatyki angielskiej i ma wiele ciekawych technik nauczania, które sprawiają, że lekcje są interaktywne i przyjemne dla uczniów.', '1.jpg'),
-(2, 3, 'Anna jest młodą nauczycielką z wielką pasją do nauczania języka angielskiego. Uwielbia pracować z dziećmi i młodzieżą i wykorzystuje innowacyjne metody, aby uczniowie byli zainteresowani nauką języka angielskiego. Anna zawsze stara się przekazać swoją wiedzę w ciekawy i przystępny sposób, co sprawia, że jej lekcje są zawsze wypełnione pozytywną energią.', '2.jpg'),
-(3, 2, 'Piotr jest doświadczonym nauczycielem języka angielskiego, który ma ponad 15 lat doświadczenia w nauczaniu języka angielskiego na różnych poziomach zaawansowania. Piotr specjalizuje się w nauczaniu biznesowego języka angielskiego i pomaga swoim uczniom rozwijać umiejętności komunikacyjne potrzebne w świecie biznesu. Piotr jest również autorem wielu podręczników do nauki języka angielskiego, które są wykorzystywane w szkołach na całym świecie.', '3.jpg');
+INSERT INTO `teachers` (`id`, `userId`, `groupId`, `description`, `img`) VALUES
+(1, 1, 3, 'Jan jest nauczycielem z ponad 10-letnim doświadczeniem w nauczaniu języka angielskiego. Jego pasją jest pomaganie swoim uczniom osiągnąć swój pełny potencjał w nauce języka angielskiego. Jan jest ekspertem w zakresie gramatyki angielskiej i ma wiele ciekawych technik nauczania, które sprawiają, że lekcje są interaktywne i przyjemne dla uczniów.', '1.jpg'),
+(2, 3, 2, 'Anna jest młodą nauczycielką z wielką pasją do nauczania języka angielskiego. Uwielbia pracować z dziećmi i młodzieżą i wykorzystuje innowacyjne metody, aby uczniowie byli zainteresowani nauką języka angielskiego. Anna zawsze stara się przekazać swoją wiedzę w ciekawy i przystępny sposób, co sprawia, że jej lekcje są zawsze wypełnione pozytywną energią.', '2.jpg'),
+(3, 2, 1, 'Piotr jest doświadczonym nauczycielem języka angielskiego, który ma ponad 15 lat doświadczenia w nauczaniu języka angielskiego na różnych poziomach zaawansowania. Piotr specjalizuje się w nauczaniu biznesowego języka angielskiego i pomaga swoim uczniom rozwijać umiejętności komunikacyjne potrzebne w świecie biznesu. Piotr jest również autorem wielu podręczników do nauki języka angielskiego, które są wykorzystywane w szkołach na całym świecie.', '3.jpg');
 
 -- --------------------------------------------------------
 
@@ -356,7 +363,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT dla tabeli `marks`
 --
 ALTER TABLE `marks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `messages`
