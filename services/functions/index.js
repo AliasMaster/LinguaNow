@@ -2,6 +2,7 @@ import { onchangeCheckBox, selectAllCheckBoxes } from './checkBoxes.js';
 import { deleteRows, deleteInDatabase, cancel } from './deleteRows.js';
 import { edit, updateInDatabase } from './edit.js';
 import { addMessage, sendMessage } from './addMessage.js';
+import { addMark, put } from './addMark.js';
 
 // checkBoxes
 window.onchangeCheckBox = onchangeCheckBox;
@@ -19,3 +20,7 @@ window.deleteInDatabase = deleteInDatabase;
 // addMessage
 window.addMessage = addMessage;
 window.sendMessage = sendMessage;
+
+// addMark
+window.addMark = addMark;
+window.put = put;

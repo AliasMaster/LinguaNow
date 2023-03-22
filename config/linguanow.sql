@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 22 Mar 2023, 00:26
+-- Czas generowania: 22 Mar 2023, 17:07
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.1.6
 
@@ -133,16 +133,22 @@ CREATE TABLE `marks` (
   `id` int(11) NOT NULL,
   `mark` int(11) NOT NULL,
   `studentId` int(11) NOT NULL,
-  `description` text COLLATE utf8_polish_ci NOT NULL
+  `description` text COLLATE utf8_polish_ci NOT NULL,
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Zrzut danych tabeli `marks`
 --
 
-INSERT INTO `marks` (`id`, `mark`, `studentId`, `description`) VALUES
-(1, 4, 4, 'Sprawdzian'),
-(5, 3, 4, 'Kartkówka');
+INSERT INTO `marks` (`id`, `mark`, `studentId`, `description`, `date`) VALUES
+(8, 4, 4, 'Sprawdzian', '2023-03-20'),
+(9, 3, 4, 'Kartkówka', '2023-03-21'),
+(10, 2, 5, 'Sprawdzian', '2023-03-19'),
+(11, 4, 6, 'Kartkówka', '2023-03-20'),
+(12, 4, 4, 'Aktywność', '2023-03-22'),
+(13, 6, 5, 'Aktywność', '2023-03-22'),
+(14, 1, 4, 'Sprawdzian', '2023-03-22');
 
 -- --------------------------------------------------------
 
@@ -363,7 +369,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT dla tabeli `marks`
 --
 ALTER TABLE `marks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `messages`

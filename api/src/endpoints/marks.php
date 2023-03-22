@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 class Marks
 {
     private PDO $conn;
@@ -27,13 +29,13 @@ class Marks
                 break;
             case "PUT":
                 if ($token->token == 2) {
-                    $data = json_decode(file_get_contents("php://input"));
+                    $data = (object)json_decode(file_get_contents('php://input'), true);
                     if (isset($data->mark) && isset($data->description) && !empty(trim($data->mark)) && !empty(trim($data->description))) {
                         $this->put($id, $token->userId, $data);
                     } else {
                         http_response_code(401);
                         echo json_encode([
-                            'message' => 'Nie poprawne dane'
+                            'message' => "Nie poprawne dane"
                         ]);
                         exit;
                     }
@@ -66,7 +68,7 @@ class Marks
             exit;
         }
 
-        $sql = "SELECT * FROM marks WHERE studentId = :id";
+        $sql = "SELECT * FROM marks WHERE studentId = :id ORDER BY date ASC";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -76,7 +78,8 @@ class Marks
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             array_push($marks, [
                 "mark" => $row['mark'],
-                "description" => $row['description']
+                "description" => $row['description'],
+                "date" => $row['date']
             ]);
         }
 
@@ -88,47 +91,38 @@ class Marks
 
     public function getStudentsMarks($teacherId)
     {
-        $sql = "SELECT users.id, CONCAT(users.fname, ' ', users.lname) as name, marks.mark, marks.description FROM marks INNER JOIN students ON marks.studentId = students.userId INNER JOIN groups ON students.groupId = groups.id INNER JOIN teachers ON teachers.groupId = groups.id INNER JOIN users ON users.id = marks.studentId WHERE teachers.userId = :id";
+        $selectStudents = "SELECT users.id, CONCAT(users.fname, ' ', users.lname) as name FROM users INNER JOIN students ON users.id = students.userId INNER JOIN groups ON groups.id = students.groupId INNER JOIN teachers ON teachers.groupId = groups.id WHERE teachers.userId = :id ORDER BY id ASC;";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($selectStudents);
         $stmt->bindValue(":id", $teacherId, PDO::PARAM_INT);
         $stmt->execute();
 
-        $marks = [];
+        $selectStudentMarks = "SELECT * FROM marks WHERE studentId = :id ORDER BY date ASC";
+        $stmtMarks = $this->conn->prepare($selectStudentMarks);
 
-        $buffer = (object)[
-            "id" => 0,
-            "name" => ''
-        ];
+        $users = [];
+        while ($studnets = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $stmtMarks->bindValue(':id', $studnets['id'], PDO::PARAM_INT);
+            $stmtMarks->execute();
 
-        $i = 0;
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            if ($buffer->id == 0) {
-                $buffer = (object) [
-                    "id" => $row['id'],
-                    "name" => $row['name']
-                ];
+            $marks = [];
+            while ($mark = $stmtMarks->fetch(PDO::FETCH_ASSOC)) {
+                array_push($marks, [
+                    "mark" => $mark['mark'],
+                    "description" => $mark['description'],
+                    "date" => $mark['date']
+                ]);
             }
 
-            if ($buffer->id != $row['id']) {
-                $i++;
-            }
-
-            $marks[$i] = [
-                "id" => $row['id'],
-                "name" => $row['name'],
-                "marks" => []
-            ];
-
-            array_push($marks[$i]['marks'], [
-                "mark" => $row['mark'],
-                "description" => $row['description']
+            array_push($users, [
+                "id" => $studnets['id'],
+                "name" => $studnets['name'],
+                "marks" => $marks
             ]);
         }
 
         echo json_encode([
-            "users" => $marks
+            "users" => $users
         ]);
     }
 
@@ -144,16 +138,19 @@ class Marks
         if ($stmt->rowCount() == 0) {
             http_response_code(401);
             echo json_encode([
-                'message' => 'access denied'
+                'message' => 'Nie znaleziono takiego ucznia'
             ]);
             exit;
         }
 
-        $insertSql = "INSERT INTO marks VALUES(NULL, :mark, :studentId, :description)";
+        $date = date('Y-m-d');
+
+        $insertSql = "INSERT INTO marks VALUES(NULL, :mark, :studentId, :description, :date)";
         $stmt = $this->conn->prepare($insertSql);
         $stmt->bindValue(":mark", $data->mark, PDO::PARAM_INT);
         $stmt->bindValue(":studentId", $id, PDO::PARAM_INT);
         $stmt->bindValue(":description", $data->description, PDO::PARAM_STR);
+        $stmt->bindValue(":date", $date, PDO::PARAM_STR);
 
         $stmt->execute();
 
@@ -161,7 +158,8 @@ class Marks
             "message" => "Dodano pomyślnie",
             "id" => $id,
             "mark" => $data->mark,
-            "description" => $data->description
+            "description" => $data->description,
+            "date" => $date
         ]);
     }
 }

@@ -192,6 +192,15 @@ table th {
   text-align: left;
 }
 
+.iconRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 52px;
+  margin: 0;
+}
+
 /* checkbox on tables */
 
 .checkBoxContainer {
@@ -253,7 +262,6 @@ table {
   box-shadow: 0 0 25px -10px #000;
   width: 100%;
   font-size: 14px;
-  overflow: hidden;
   background-color: #fffbfe;
 }
 
@@ -275,14 +283,25 @@ tr:hover {
   background-color: rgb(230, 225, 229, 0.5);
 }
 
+tr:first-of-type th:first-of-type {
+  border-radius: 16px 0 0 0;
+}
+
+tr:first-of-type th:last-of-type {
+  border-radius: 0 16px 0 0;
+}
+
+tr:last-of-type td:first-of-type {
+  border-radius: 0 0 0 16px;
+}
+
+tr:last-of-type td:last-of-type {
+  border-radius: 0 0 16px 0;
+}
+
 tr:first-of-type:hover {
   background-color: unset;
 }
-
-/* th.data-edit,
-td.data-edit {
-  text-align: center;
-} */
 
 .editContainer {
   width: 40px;
@@ -620,4 +639,55 @@ h2 {
 
 .dialog select:focus + .label .text {
   color: blue;
+}
+
+/* Marks */
+
+.addContainer {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.addContainer:hover {
+  background-color: rgb(28, 27, 31, 0.08);
+}
+
+.addContainer .icon {
+  cursor: pointer;
+}
+
+.mark {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  /* width: 200px; */
+  border-radius: 16px;
+  padding: 16px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.mark:hover .tooltip {
+  visibility: visible;
 }

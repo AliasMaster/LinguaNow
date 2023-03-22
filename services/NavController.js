@@ -7,6 +7,8 @@ import {
   teachers,
   admissions,
   groups,
+  marks,
+  home,
 } from './nav/navFunctions.js';
 
 export default class NavController {
@@ -18,6 +20,8 @@ export default class NavController {
     const navBox = await new GetNav(this.startOfURL, token);
 
     const navItems = navBox.querySelectorAll('.navItem');
+
+    renderContent(home());
 
     navItems.forEach((navItem) => {
       navItem.addEventListener('click', async () => {
@@ -49,7 +53,14 @@ export default class NavController {
           case 'groups':
             content = await groups(this.startOfURL, token);
             break;
+          case 'marks':
+            content = await marks(this.startOfURL, token);
+            break;
+          case 'home':
+            content = home();
+            break;
           default:
+            content = home();
             break;
         }
 
