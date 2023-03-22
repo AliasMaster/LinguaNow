@@ -23,19 +23,21 @@ export default class GetNav {
   parseItemsToNav(items) {
     const navBox = document.querySelector('.navListItems');
 
+    let content = '';
     items.forEach(({ name, functionName, icon }) => {
-      navBox.innerHTML += `
+      content += `
                 <div class="navItem ${
                   name == 'home' ? 'active' : ''
                 }" aria-functionName="${functionName}">
-                    <div class="icon">
-                        <span class="material-symbols-outlined">
-                            ${icon}
-                        </span>
-                        <div class="text">${name}</div>
-                    </div>
+                    <span class="material-symbols-outlined">
+                        ${icon}
+                    </span>
+                    <div class="text">${name}</div>
                 </div>`;
     });
+
+    navBox.innerHTML = content;
+    eventListenerForNavItems();
     return navBox;
   }
 }

@@ -17,12 +17,25 @@ const { fname, lname, role } = userData;
 userBox.innerHTML = `
     <div class="userBox">
         <div>${fname} ${lname}</div>
-        <span>${role}</span>
+        <span class="role">${role}</span>
     </div>`;
 
 new NavController(startOfURL, token);
 
 const root = document.querySelector('#root');
 
-const aside = document.querySelector('aside');
-root.style.marginLeft = 28 + aside.offsetWidth + 'px';
+if (window.innerWidth > 768) {
+  const aside = document.querySelector('aside');
+  root.style.marginLeft = 28 + aside.offsetWidth + 'px';
+}
+
+window.addEventListener(
+  'resize',
+  () => {
+    if (window.innerWidth > 768) {
+      const aside = document.querySelector('aside');
+      root.style.marginLeft = 28 + aside.offsetWidth + 'px';
+    }
+  },
+  true,
+);

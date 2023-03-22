@@ -75,7 +75,7 @@ async function renderTeacher(startOfURL, token) {
             <tr class="user-${id}">
                 <td>${name}</td>
                 <td>${marksRow}</td>
-                <td>${average}</td>
+                <td class="data-average">${average}</td>
                 <td class="iconRow">
                     <div class="addContainer" onclick="addMark(this.parentElement.parentElement)">
                         <span class="material-symbols-outlined icon">
@@ -95,7 +95,7 @@ async function renderTeacher(startOfURL, token) {
                 <th>Uczeń</th>
                 <th>Oceny</th>
                 <th>Średnia</th>
-                <th>Dodaj ocene</th>
+                <th class="iconRow">Dodaj ocene</th>
             </tr>
             ${usersRows}
         </table>

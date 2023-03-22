@@ -25,6 +25,8 @@ function dialog(id) {
           <input
             type="number"
             id="addMark"
+            max="6"
+            min="1"
             value=""
             aria-labelledby="label-group"
           />
@@ -51,7 +53,7 @@ function dialog(id) {
   const buttons = `
       <div class='buttons'>
         <button onclick='cancel(this.parentElement.parentElement.parentElement)'>Anuluj</button>
-        <button onclick='put(${id}); cancel(this.parentElement.parentElement.parentElement);'>Edytuj</button>
+        <button onclick='put(${id}); cancel(this.parentElement.parentElement.parentElement);'>Dodaj</button>
       </div>
     `;
 
