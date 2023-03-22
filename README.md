@@ -1,6 +1,7 @@
 # LinguaNow
 
 * Dabase name: Lingunow
+* Import file ```./config/lingunow.sql```
 * Launching on xampp
 
 * Defaut directory: htdocs
