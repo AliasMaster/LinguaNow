@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 22 Mar 2023, 17:07
+-- Czas generowania: 22 Mar 2023, 21:56
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.1.6
 
@@ -54,26 +54,25 @@ CREATE TABLE `admissions` (
   `email` text NOT NULL,
   `phone` text NOT NULL,
   `coursesId` int(11) NOT NULL,
-  `date` datetime NOT NULL,
-  `status` enum('Done','Undone') NOT NULL
+  `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `admissions`
 --
 
-INSERT INTO `admissions` (`id`, `fname`, `lname`, `email`, `phone`, `coursesId`, `date`, `status`) VALUES
-(22, 'Adam', 'Kowalski', 'adamkowalski@gmail.com', '555-123-456', 1, '2022-01-01 10:00:00', 'Undone'),
-(23, 'Anna', 'Nowak', 'annanowak@gmail.com', '555-234-567', 2, '2022-01-02 11:00:00', 'Undone'),
-(24, 'Piotr', 'Lewandowski', 'piotrlewandowski@gmail.com', '555-345-678', 3, '2022-01-03 12:00:00', 'Undone'),
-(25, 'Katarzyna', 'Wójcik', 'katarzynawojcik@gmail.com', '555-456-789', 4, '2022-01-04 13:00:00', 'Undone'),
-(26, 'Tomasz', 'Kamiński', 'tomaszkaminski@gmail.com', '555-567-890', 5, '2022-01-05 14:00:00', 'Undone'),
-(27, 'Magdalena', 'Kowalczyk', 'magdalenakowalczyk@gmail.com', '555-678-901', 6, '2022-01-06 15:00:00', 'Undone'),
-(28, 'Marcin', 'Zieliński', 'marcinzielinski@gmail.com', '555-789-012', 7, '2022-01-07 16:00:00', 'Undone'),
-(29, 'Aleksandra', 'Szymańska', 'aleksandraszymanska@gmail.com', '555-890-123', 8, '2022-01-08 17:00:00', 'Undone'),
-(30, 'Jan', 'Dąbrowski', 'jandabrowski@gmail.com', '555-901-234', 9, '2022-01-09 18:00:00', 'Undone'),
-(31, 'Karolina', 'Jankowska', 'karolinajankowska@gmail.com', '555-012-345', 1, '2022-01-10 19:00:00', 'Undone'),
-(32, 'Piotr', 'Maj', 'piotr.maj642@gmail.com', '123123123', 3, '2023-03-01 22:08:39', 'Undone');
+INSERT INTO `admissions` (`id`, `fname`, `lname`, `email`, `phone`, `coursesId`, `date`) VALUES
+(22, 'Adam', 'Kowalski', 'adamkowalski@gmail.com', '555-123-456', 1, '2022-01-01 10:00:00'),
+(23, 'Anna', 'Nowak', 'annanowak@gmail.com', '555-234-567', 2, '2022-01-02 11:00:00'),
+(24, 'Piotr', 'Lewandowski', 'piotrlewandowski@gmail.com', '555-345-678', 3, '2022-01-03 12:00:00'),
+(25, 'Katarzyna', 'Wójcik', 'katarzynawojcik@gmail.com', '555-456-789', 4, '2022-01-04 13:00:00'),
+(26, 'Tomasz', 'Kamiński', 'tomaszkaminski@gmail.com', '555-567-890', 5, '2022-01-05 14:00:00'),
+(27, 'Magdalena', 'Kowalczyk', 'magdalenakowalczyk@gmail.com', '555-678-901', 6, '2022-01-06 15:00:00'),
+(28, 'Marcin', 'Zieliński', 'marcinzielinski@gmail.com', '555-789-012', 7, '2022-01-07 16:00:00'),
+(29, 'Aleksandra', 'Szymańska', 'aleksandraszymanska@gmail.com', '555-890-123', 8, '2022-01-08 17:00:00'),
+(30, 'Jan', 'Dąbrowski', 'jandabrowski@gmail.com', '555-901-234', 9, '2022-01-09 18:00:00'),
+(31, 'Karolina', 'Jankowska', 'karolinajankowska@gmail.com', '555-012-345', 1, '2022-01-10 19:00:00'),
+(32, 'Piotr', 'Maj', 'piotr.maj642@gmail.com', '123123123', 3, '2023-03-01 22:08:39');
 
 -- --------------------------------------------------------
 
@@ -272,8 +271,8 @@ CREATE TABLE `teachers` (
 
 INSERT INTO `teachers` (`id`, `userId`, `groupId`, `description`, `img`) VALUES
 (1, 1, 3, 'Jan jest nauczycielem z ponad 10-letnim doświadczeniem w nauczaniu języka angielskiego. Jego pasją jest pomaganie swoim uczniom osiągnąć swój pełny potencjał w nauce języka angielskiego. Jan jest ekspertem w zakresie gramatyki angielskiej i ma wiele ciekawych technik nauczania, które sprawiają, że lekcje są interaktywne i przyjemne dla uczniów.', '1.jpg'),
-(2, 3, 2, 'Anna jest młodą nauczycielką z wielką pasją do nauczania języka angielskiego. Uwielbia pracować z dziećmi i młodzieżą i wykorzystuje innowacyjne metody, aby uczniowie byli zainteresowani nauką języka angielskiego. Anna zawsze stara się przekazać swoją wiedzę w ciekawy i przystępny sposób, co sprawia, że jej lekcje są zawsze wypełnione pozytywną energią.', '2.jpg'),
-(3, 2, 1, 'Piotr jest doświadczonym nauczycielem języka angielskiego, który ma ponad 15 lat doświadczenia w nauczaniu języka angielskiego na różnych poziomach zaawansowania. Piotr specjalizuje się w nauczaniu biznesowego języka angielskiego i pomaga swoim uczniom rozwijać umiejętności komunikacyjne potrzebne w świecie biznesu. Piotr jest również autorem wielu podręczników do nauki języka angielskiego, które są wykorzystywane w szkołach na całym świecie.', '3.jpg');
+(2, 3, 2, 'Piotr jest doświadczonym nauczycielem języka angielskiego, który ma ponad 15 lat doświadczenia w nauczaniu języka angielskiego na różnych poziomach zaawansowania. Piotr specjalizuje się w nauczaniu biznesowego języka angielskiego i pomaga swoim uczniom rozwijać umiejętności komunikacyjne potrzebne w świecie biznesu. Piotr jest również autorem wielu podręczników do nauki języka angielskiego, które są wykorzystywane w szkołach na całym świecie.', '2.jpg'),
+(3, 2, 1, 'Anna jest młodą nauczycielką z wielką pasją do nauczania języka angielskiego. Uwielbia pracować z dziećmi i młodzieżą i wykorzystuje innowacyjne metody, aby uczniowie byli zainteresowani nauką języka angielskiego. Anna zawsze stara się przekazać swoją wiedzę w ciekawy i przystępny sposób, co sprawia, że jej lekcje są zawsze wypełnione pozytywną energią.', '3.jpg');
 
 -- --------------------------------------------------------
 
@@ -320,6 +319,12 @@ ALTER TABLE `accesslevels`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `admissions`
+--
+ALTER TABLE `admissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `groups`
 --
 ALTER TABLE `groups`
@@ -358,6 +363,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `accesslevels`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT dla tabeli `admissions`
+--
+ALTER TABLE `admissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT dla tabeli `groups`

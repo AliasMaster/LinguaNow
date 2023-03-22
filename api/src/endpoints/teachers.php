@@ -33,7 +33,7 @@ class Teachers
     {
         // $sql = "SELECT CONCAT(fname, ' ', lname) as name, id, email, city, address, phone FROM users WHERE accessLevel = 2";
 
-        $sql = "SELECT CONCAT(fname, ' ', fname) as name, description, img FROM teachers INNER JOIN users ON users.id = teachers.userId";
+        $sql = "SELECT CONCAT(fname, ' ', lname) as name, description, img FROM teachers INNER JOIN users ON users.id = teachers.userId";
 
         $result = $this->conn->query($sql);
 

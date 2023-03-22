@@ -22,7 +22,7 @@ export default class getTeachers {
       this.teachers.forEach(({ name, description, img }) => {
         subpageTeachersBox.innerHTML += `
             <article class="teacher">
-                <img src="../../assets/images/teachers/${img}" alt="${name}">
+                <img src="../assets/images/teachers/${img}" alt="${name}">
                 <div class=\"teacher-text\">
                     <h3>${name}</h3>
                     <p>${description}</p>

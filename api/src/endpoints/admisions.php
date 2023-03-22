@@ -38,7 +38,7 @@ class Admissions
 
     public function getAll()
     {
-        $sql = "SELECT admissions.id, CONCAT(fname, ' ', lname) as name, email, phone, courses.name as course, date FROM `admissions` INNER JOIN courses ON courses.id = admissions.coursesId WHERE status='undone' ORDER BY date DESC";
+        $sql = "SELECT admissions.id, CONCAT(fname, ' ', lname) as name, email, phone, courses.name as course, date FROM `admissions` INNER JOIN courses ON courses.id = admissions.coursesId ORDER BY date DESC";
 
         $result = $this->conn->query($sql);
 
