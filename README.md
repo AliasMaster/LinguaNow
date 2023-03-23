@@ -1,7 +1,7 @@
 # LinguaNow
 
 ### Server setup
-* Dabase name: Lingunow
+* Dabase name: lingunow
 * Import file ```./config/lingunow.sql```
 * Launching on xampp
 
